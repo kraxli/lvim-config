@@ -6,12 +6,47 @@ filled in as strings with either
 a global executable or a path to
 an executable
 ]]
+
+-- Packages
+
+require("install.plugins")
+
+-----------------------------------------------------------------------
+-- Load local init:
+-----------------------------------------------------------------------
+vim.cmd([[
+  echom expand('<sfile>')
+  let g:local_source_dir = fnamemodify(expand('<sfile>'), ':h').'/local/'
+
+let g:path_sep = ((has('win16') || has('win32') || has('win64'))?'\':'/')
+let g:nvim_dir = fnamemodify(expand('<sfile>'), ':p:h:gs?\\?'.g:path_sep.'?')  " see :h filename-modifiers  /  use $VIM_PATH
+
+" load you local settings
+if filereadable(g:local_source_dir . 'init.vim')
+	execute 'source ' . g:local_source_dir . 'init.vim'
+endif
+
+" -----------------------------------------------------------------------
+" -- Load other local file other than the init-file
+" -----------------------------------------------------------------------
+if exists('g:local_source_dir') " && isdirectory(g:local_source_dir)
+    echom split(globpath(g:local_source_dir, '*.vim'), '\n')
+   for file in split(globpath(g:local_source_dir, '*.vim'), '\n')
+      " local/init.vim already loaded in init.vim (main init.vim file in parent directory)
+      if file == g:local_source_dir . 'init.vim'
+	        continue
+      endif
+      execute 'source' file
+   endfor
+endif
+]])
+
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 --- Timing {{{
 -- vim.opt.timeout=true
 -- vim.opt.ttimeout=true
-vim.opt.timeoutlen=250   --- Time out on mappings
+vim.opt.timeoutlen=400   --- Time out on mappings
 vim.opt.ttimeoutlen=10   --- Time out on key codes
 vim.opt.updatetime=200   --- Idle time to write swap and trigger CursorHold
 vim.opt.redrawtime=2000  --- Time in milliseconds for stopping display redraw
@@ -33,103 +68,41 @@ lvim.leader = "space"
 -------------------------------------------------------
 -- add your own keymapping
 -------------------------------------------------------
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = ""
--- edit a default keymapping
-lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
+-- require('config.plugins.neuron')
 
-vim.api.nvim_set_keymap('', '<c-PageUp>', "<Cmd>bp<CR>", {})
-vim.api.nvim_set_keymap('', '<c-DownUp>', "<Cmd>bn<CR>", {})
--- vim.api.nvim_set_keymap('', '<A-j>', "<Cmd>bp<CR>", {})
--- vim.api.nvim_set_keymap('', '<A-k>', "<Cmd>bn<CR>", {})
+-- To remove keymappings set by Lunarvim
+-- lvim.keys.normal_mode["<S-h>"] = false
 
-vim.api.nvim_set_keymap('', '<localleader>a', "<Cmd>NvimTreeToggle<CR>", {})
+lvim.builtin.which_key.mappings = {
+  ["c"] = { },
+  ["w"] = { },
+}
 
-vim.api.nvim_set_keymap('', '<localleader>e', "<Cmd>NvimTreeToggle<CR>", {})
-vim.api.nvim_set_keymap('', '<localleader>a', "<Cmd>NvimTreeToggle<CR>", {})
-vim.api.nvim_set_keymap('', '<c-b>', ":bd<CR>", { })
+require('config.mappings')
+-- local mapfile = loadfile('config.mappings.lua')
+-- mapfile()
+
+-- TODO: unmap <c-z>
+
+require('config.plugins.telescope')
+-------------------------------------------------------------
+-- Functions
+-------------------------------------------------------------
 
 vim.cmd([[
-  cnoremap <expr> <Up>  pumvisible() ? "\<C-p>" : "\<Up>"
-  cnoremap <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
+  command! KeyMaps :call utils#KeyMaps()
+  " save and quit
+  command! W :w!
+  command! Q :q
+  cnoreabbrev <silent> ww w!
+  cnoreabbrev <silent> wwa wa!
+  cnoreabbrev <silent> xx x!
+  cnoreabbrev <silent> xxa xa!
+  cnoreabbrev <silent> qq q!
+  cnoreabbrev <silent> qqa qa!
+  cnoreabbrev <silent> ee e!
 ]])
-
-vim.cmd([[
-    nnoremap  [Window]   <Nop>
-    nmap      w [Window]
-    nnoremap [Window]b  <cmd>buffer#<CR>
-    nnoremap [Window]c  <cmd>close<CR>
-    nnoremap [Window]d  <cmd>bdelete<CR>
-    nnoremap [Window]h  <cmd>split<CR>
-    nnoremap [Window]v  <cmd>vsplit<CR>
-    nnoremap [Window]t  <cmd>tabnew<CR>
-    nnoremap [Window]o  <cmd>only<CR>
-    nnoremap [Window]q  <cmd>quit<CR>
-    nnoremap [Window]x  <cmd>call utils#window_empty_buffer()<CR>
-    nnoremap [Window]z  <cmd>call utils#zoom()<CR>
-
-    " Split current buffer, go to previous window and previous buffer
-    nnoremap [Window]h <cmd>split<CR>:wincmd p<CR>:e#<CR>
-    nnoremap [Window]v <cmd>vsplit<CR>:wincmd p<CR>:e#<CR>
-
-    nmap [Window]g <cmd>call utils#toggle_background()<CR>
-
-		nnoremap <silent> [Window]n  :tabnext<CR>
-		nnoremap <silent> [Window]p  :tabprev<CR>
-]])
-
-
-local preloadTelescope = function()
-	local keymap = vim.api.nvim_set_keymap
-	local opts = { noremap = true, silent = true }
-
-	-- General pickers
-	keymap('n', '<localleader>r', '<cmd>Telescope resume<CR>', opts)
-	keymap('n', '<localleader>R', '<cmd>Telescope pickers<CR>', opts)
-	keymap('n', '<localleader>f', '<cmd>Telescope find_files<CR>', opts)
-	keymap('n', '<localleader>g', '<cmd>Telescope live_grep<CR>', opts)
-	keymap('n', '<localleader>b', '<cmd>Telescope buffers<CR>', opts)
-	keymap('n', '<localleader>h', '<cmd>Telescope highlights<CR>', opts)
-	keymap('n', '<localleader>j', '<cmd>Telescope jumplist<CR>', opts)
-	keymap('n', '<localleader>m', '<cmd>Telescope marks<CR>', opts)
-	keymap('n', '<localleader>o', '<cmd>Telescope vim_options<CR>', opts)
-	keymap('n', '<localleader>t', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', opts)
-	keymap('n', '<localleader>v', '<cmd>Telescope registers<CR>', opts)
-	keymap('n', '<localleader>u', '<cmd>Telescope spell_suggest<CR>', opts)
-	keymap('n', '<localleader>s', '<cmd>Telescope session-lens search_session<CR>', opts)
-	keymap('n', '<localleader>x', '<cmd>Telescope oldfiles<CR>', opts)
-	keymap('n', '<localleader>z', '<cmd>lua require"plugins.telescope".pickers.zoxide()<CR>', opts)
-	keymap('n', '<localleader>;', '<cmd>Telescope command_history<CR>', opts)
-	keymap('n', '<localleader>/', '<cmd>Telescope search_history<CR>', opts)
-
-	-- git_commits    git_bcommits   git_branches
-	-- git_status     git_stash      git_files
-	-- file_browser   tags           fd             autocommands   quickfix
-	-- filetypes      commands       man_pages      help_tags      loclist
-	-- lsp_workspace_diagnostics     lsp_document_diagnostics
-
-	-- Location-specific find files/directories
-	keymap('n', '<localleader>n', '<cmd>lua require"plugins.telescope".pickers.plugin_directories()<CR>', opts)
-	keymap('n', '<localleader>w', '<cmd>lua require"plugins.telescope".pickers.notebook()<CR>', opts)
-
-	-- Navigation
-	keymap('n', '<leader>/', '<cmd>Telescope current_buffer_fuzzy_find<CR>', opts)
-	keymap('n', '<leader>gt', '<cmd>lua require"plugins.telescope".pickers.lsp_workspace_symbols_cursor()<CR>', opts)
-	keymap('n', '<leader>gf', '<cmd>lua require"plugins.telescope".pickers.find_files_cursor()<CR>', opts)
-	keymap('n', '<leader>gg', '<cmd>lua require"plugins.telescope".pickers.grep_string_cursor()<CR>', opts)
-	keymap('x', '<leader>gg', '<cmd>lua require"plugins.telescope".pickers.grep_string_visual()<CR>', opts)
-
-	-- LSP related
-	keymap('n', '<localleader>dd', '<cmd>Telescope lsp_definitions<CR>', opts)
-	keymap('n', '<localleader>di', '<cmd>Telescope lsp_implementations<CR>', opts)
-	keymap('n', '<localleader>dr', '<cmd>Telescope lsp_references<CR>', opts)
-	keymap('n', '<localleader>da', '<cmd>Telescope lsp_code_actions<CR>', opts)
-	keymap('x', '<localleader>da', ':Telescope lsp_range_code_actions<CR>', opts)
-end
-
-preloadTelescope()
-
+-------------------------------------------------------------
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
 -- local _, actions = pcall(require, "telescope.actions")
@@ -164,10 +137,14 @@ preloadTelescope()
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
+lvim.builtin.nvimtree.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
+lvim.builtin.dap.active = true
+
 -- if you don't want all the parsers change this to a table of the ones you want
+
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
@@ -187,6 +164,8 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
+
+vim.list_extend(lvim.lsp.override, { "pyright" })
 
 -- ---@usage disable automatic installation of servers
 -- lvim.lsp.automatic_servers_installation = false
@@ -224,20 +203,6 @@ lvim.builtin.treesitter.highlight.enabled = true
 --   end
 -- end
 
--- ============== old ===================== 
--- lvim.lang.python.formatters = {
---   {
---     exe = "black",
---   }
--- }
-
--- -- set an additional linter
--- lvim.lang.python.linters = {
--- -- set additional linters
---   { exe = "black" },
---   { exe = "flake8" }
--- }
-
 -- ============== new ===================== 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
@@ -253,32 +218,14 @@ formatters.setup {
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { exe = "black" },
-  {
-    exe = "eslint_d",
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "javascript", "javascriptreact" },
-  },
+  -- { exe = "black" },
+  -- {
+    -- exe = "eslint_d",
+    -- ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    -- filetypes = { "javascript", "javascriptreact" },
+  -- },
 }
 -- ===========================================
-
-
--- Additional Plugins
-lvim.plugins = {
-    {"folke/tokyonight.nvim"},
-    {
-      "folke/trouble.nvim",
-      cmd = "TroubleToggle",
-    },
-    {"rakr/vim-one"}
-}
-
-
--- if dein#tap('todo-comments.nvim')
--- 	nnoremap <LocalLeader>dt <cmd>TodoTelescope<CR>
--- endif
--- require('todo-comments').setup({
--- 	signs = false,
 
 
 

@@ -47,7 +47,7 @@ function! utils#KeyMaps()
     silent g/^\s*$/d
 endfunction
 
-
+" TODO: tern into lua cuntion (see: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
 function! utils#toggle_background() "{{{
 	if ! exists('g:colors_name')
 		echomsg 'No colorscheme set'
@@ -73,6 +73,7 @@ function! utils#toggle_background() "{{{
 endfunction "}}}
 
 
+" TODO: tern into lua cuntion (see: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
 function! utils#window_empty_buffer() "{{{
 	let l:current = bufnr('%')
 	if ! getbufvar(l:current, '&modified')
@@ -82,6 +83,7 @@ function! utils#window_empty_buffer() "{{{
 endfunction "}}}
 
 
+" TODO: tern into lua cuntion (see: https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
 " Simple zoom toggle
 function! utils#zoom() "{{{
 	if exists('t:zoomed')
