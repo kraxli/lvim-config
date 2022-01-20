@@ -7,14 +7,19 @@ a global executable or a path to
 an executable
 --]]
 
+lvim.builtin.dap.active = true
+
 -- Packages
 
 require("install.plugins")
-require("config.plugins.nvimtree")
+-- require("config.plugins.nvimtree")
 
 -- commands
 
 require("config.commands")
+
+-- plugins
+
 
 -----------------------------------------------------------------------
 -- Load local init:
@@ -51,24 +56,22 @@ vim.cmd([[
 --- Timing {{{
 -- vim.opt.timeout=true
 -- vim.opt.ttimeout=true
-vim.opt.timeoutlen=400   --- Time out on mappings
+vim.opt.timeoutlen=300   --- Time out on mappings
 vim.opt.ttimeoutlen=10   --- Time out on key codes
 vim.opt.updatetime=200   --- Idle time to write swap and trigger CursorHold
 vim.opt.redrawtime=2000  --- Time in milliseconds for stopping display redraw
-
--- vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
-
 --- }}}
 
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
--- lvim.colorscheme = "onedarker"
-lvim.colorscheme = "one"
+lvim.colorscheme = "one-nvim" --  "onedarker"
+vim.o.background = 'light'
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
+-- vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
 -------------------------------------------------------
 -- add your own keymapping
@@ -82,31 +85,24 @@ lvim.builtin.which_key.mappings = {
   ["c"] = { },
   ["w"] = { },
 }
+-- TODO: unmap <c-z>
+
 
 require('config.mappings')
 -- local mapfile = loadfile('config.mappings.lua')
 -- mapfile()
 
--- TODO: unmap <c-z>
 
+-- plugins
+
+require("config.plugins.dap")
 require('config.plugins.telescope')
+
 -------------------------------------------------------------
 -- Functions
 -------------------------------------------------------------
 
-vim.cmd([[
-  command! KeyMaps :call utils#KeyMaps()
-  " save and quit
-  command! W :w!
-  command! Q :q
-  cnoreabbrev <silent> ww w!
-  cnoreabbrev <silent> wwa wa!
-  cnoreabbrev <silent> xx x!
-  cnoreabbrev <silent> xxa xa!
-  cnoreabbrev <silent> qq q!
-  cnoreabbrev <silent> qqa qa!
-  cnoreabbrev <silent> ee e!
-]])
+
 -------------------------------------------------------------
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -170,12 +166,10 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
 
-vim.list_extend(lvim.lsp.override, { "pyright" })
-
--- ---@usage disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = false
+lvim.lsp.automatic_servers_installation = true
 
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
+-- Overriding a server will completely bypass the lsp-installer, so you would have to manage the installation for any of those servers manually.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
 -- vim.list_extend(lvim.lsp.override, { "pyright" })
 
@@ -209,33 +203,40 @@ vim.list_extend(lvim.lsp.override, { "pyright" })
 -- end
 
 -- ============== new ===================== 
+
+lvim.format_on_save = true
+
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
+-- Lazy-loading the formatter setup: By default, all null-ls providers are checked on startup.
+-- If you want to avoid that or want to only set up the provider when you opening the associated file-type, 
+-- then you can use filetype plugins for this purpose ($LUNARVIM_CONFIG_DIR/after/ftplugin).
+
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { exe = "black" },
+  { exe = "black", args = {"--line-width=100"} },  -- TODO: more options (see nvim-config)
+  { exe = "isort", filetypes = { "python" } },
   -- {
   --   exe = "prettier",
-  --   ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-  --   filetypes = { "typescript", "typescriptreact" },
+  --   args = { "--print-width", "100" },
+  --   filetypes = { "typescript", "typescriptreact", "markdown" },
   -- },
 }
 
 -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  -- { exe = "black" },
+  { exe = "flake8", args = {"--max-line-length=99"} }, -- TODO: more options (see nvim-config)
+  -- { exe = "codespell", filetypes = { "python", "javascript" } },
   -- {
-    -- exe = "eslint_d",
-    -- ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    -- filetypes = { "javascript", "javascriptreact" },
+  --   exe = "shellcheck",
+  --   args = { "--severity", "warning" },
   -- },
 }
--- ===========================================
 
+-- diagnostics
+lvim.lsp.diagnostics.underline = false
+lvim.lsp.diagnostics.virtual_text = true
+lvim.autocommands.custom_groups = {
+  { "CursorHold", "*", "lua vim.diagnostic.open_float(0,{scope='line'})" },
+}
 
-
-
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }

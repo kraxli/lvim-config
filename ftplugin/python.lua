@@ -2,6 +2,8 @@
 
 -- /user/bin/python
 local pythonPath = '/home/dave/anaconda3/bin/python'
+vim.api.nvim_command("command! LspFormat lua vim.lsp.buf.formatting_sync(nil, 1000)")
+-- vim.api.nvim_command("command! -range LspFormat '<,'> lua vim.lsp.buf.range_formatting()")
 
 -- require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 -- require('dap-python').setup('/home/dave/anaconda3/bin/python')
@@ -41,3 +43,7 @@ dap.configurations.python = {
     end;
   },
 }
+
+local dap_install = require "dap-install"
+dap_install.config("python", {})
+

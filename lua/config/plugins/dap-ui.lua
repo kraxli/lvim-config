@@ -3,7 +3,7 @@
 require("dapui").setup({
   icons = {
     expanded = "▾",
-    collapsed = "▸"
+    collapsed = "▸",
   },
   mappings = {
     -- Use a table to apply multiple mappings
@@ -23,7 +23,7 @@ require("dapui").setup({
       -- "watches"
     },
     width = 50,
-    position = "right" -- Can be "left" or "right"
+    position = "right", -- Can be "left" or "right"
   },
   tray = {
     open_on_start = true,
@@ -31,10 +31,10 @@ require("dapui").setup({
       "repl"
     },
     height = 10,
-    position = "bottom" -- Can be "bottom" or "top"
+    position = "bottom", -- Can be "bottom" or "top"
   },
-  floating = {
-    max_height = nil, -- These can be integers or a float between 0 and 1.
-    max_width = nil   -- Floats will be treated as percentage of your screen.
-  }
+  -- floating = {
+  --   max_height = nil, -- These can be integers or a float between 0 and 1.
+  --   max_width = nil,   -- Floats will be treated as percentage of your screen.
+  -- },
 })

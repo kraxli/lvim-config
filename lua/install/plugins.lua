@@ -1,6 +1,4 @@
 
-require("config.plugins.dap")
-
 -- Additional Plugins
 lvim.plugins = {
     -- {
@@ -17,20 +15,19 @@ lvim.plugins = {
       cmd = "TroubleToggle",
     },
 
-    
-    -- {"rakr/vim-one"},
     {
-      -- css, html, ... 
+      -- css, html, ...
       "turbio/bracey.vim",
       cmd = {"Bracey", "BracyStop", "BraceyReload", "BraceyEval"},
       run = "npm install --prefix server",
     },
+
     { "tpope/vim-repeat" },
     -- {
     --   "tpope/vim-surround",
     --   keys = {"sc", "sd", "sa"},
     -- },
- 
+
     {
      'machakann/vim-sandwich',
       keys = { '<Plug>(operator-sandwich-', '<Plug>(textobj-sandwich-' },
@@ -40,8 +37,8 @@ lvim.plugins = {
         vim.g.textobj_sandwich_no_default_key_mappings = 1
       end,
       config = function() -- config: load stuff after the plugin is loaded
+        lvim.keys.normal_mode["sa"] =  "<Plug>(operator-sandwich-add)"
         vim.cmd([[
-            lvim.keys.normal_mode["sa"] =  <Plug>(operator-sandwich-add)
             " nmap <silent> sa <Plug>(operator-sandwich-add)
             xmap <silent> sa <Plug>(operator-sandwich-add)
             omap <silent> sa <Plug>(operator-sandwich-g@)
@@ -174,29 +171,30 @@ lvim.plugins = {
     -------------------------------------------------------------------------------
     {
       "rcarriga/nvim-dap-ui",
-      -- after = {"nvim-dap"},
-      cmd = "lua dapui",
-      requires = {"mfussenegger/nvim-dap"},  -- , opt = true
       config = function()
-        requires("config/plugins/dap-ui")
-      end
+        require("dapui").setup()
+      end,
+      ft = { "python", "rust", "go" },
+      event = "BufReadPost",
+      requires = { "mfussenegger/nvim-dap" },
+      disable = not lvim.builtin.dap.active,
     },
+    --     requires("config/plugins/dap-ui")
 
-    {"nvim-telescope/telescope-dap.nvim"},
+    -- {"nvim-telescope/telescope-dap.nvim", config=function() require("config.plugins.telescope_dap") end},
 
     {
       "simrat39/symbols-outline.nvim",
       cmd = "SymbolsOutline",
     },
 
+    -- lsp
     {
-      "ray-x/lsp_signature.nvim",
-      event = "BufRead",
-      config = function()
-        require "lsp_signature".setup()
-      end
+        "ray-x/lsp_signature.nvim",
+        config = function() require"lsp_signature".on_attach({toggle_key = '<M-a>', hi_parameter = "LspSignatureActiveParameter"}) end,
+        event = "BufRead", -- for setup
     },
-    
+
     -- autoclose and autorename html tag
     {
       "windwp/nvim-ts-autotag",
@@ -213,8 +211,10 @@ lvim.plugins = {
     {
       "jbyuki/one-small-step-for-vimkind",
       ft = { "lua" },
-      -- setup = function() require("config.plugins.dap") end, 
+      -- setup = function() require("config.plugins.dap") end,
     },
+
+   -- {"onsails/lspkind-nvim"},
 
     -- python
     -- {"mfussenegger/nvim-dap-python"},
@@ -230,19 +230,19 @@ lvim.plugins = {
     },
 
     -- git blame
-    {
-      "f-person/git-blame.nvim",
-      event = "BufRead",
-      config = function()
-        vim.cmd "highlight default link gitblame SpecialComment"
-        vim.g.gitblame_enabled = 0
-      end,
-    },
+    -- {
+    --   "f-person/git-blame.nvim",
+    --   event = "BufRead",
+    --   config = function()
+    --     vim.cmd "highlight default link gitblame SpecialComment"
+    --     vim.g.gitblame_enabled = 0
+    --   end,
+    -- },
 
     -------------------------------------------------------------------------------
     -- NOTE TAKING / MARKDOWN / LATEX
     -------------------------------------------------------------------------------
-    
+
     {
       "iamcco/markdown-preview.nvim",
       run = "cd app && npm install",
@@ -271,7 +271,18 @@ lvim.plugins = {
         require('config.plugins.vimwiki')
       end
     },
+
+    -- colorschemes
+    {"rakr/vim-one"},
+    {"Th3Whit3Wolf/one-nvim"},
+    {"Th3Whit3Wolf/space-nvim"},
+    {"Th3Whit3Wolf/onebuddy"},
+    {"Mofiqul/vscode.nvim"},
+    {"rafamadriz/neon"},
+
 }
+
+
 
 -- if dein#tap('todo-comments.nvim')
 -- 	nnoremap <LocalLeader>dt <cmd>TodoTelescope<CR>

@@ -10,13 +10,20 @@ lvim.keys.normal_mode["q"] = "<cmd>BufferClose!<CR>"
 -- vim.api.nvim_set_keymap('n', '<c-c>', "<cmd>BufferClose!<CR>", {})
 
 
-vim.api.nvim_set_keymap('', '<c-PageUp>', "<Cmd>bp<CR>", {})
-vim.api.nvim_set_keymap('', '<c-PageDown>', "<Cmd>bn<CR>", {})
+vim.api.nvim_set_keymap('', '<c-PageDown>', "<Cmd>bp<CR>", {})
+vim.api.nvim_set_keymap('', '<c-PageUp>', "<Cmd>bn<CR>", {})
 -- vim.api.nvim_set_keymap('', '<A-j>', "<Cmd>bp<CR>", {})
 -- vim.api.nvim_set_keymap('', '<A-k>', "<Cmd>bn<CR>", {})
 
-vim.api.nvim_set_keymap('', '<localleader>a', "<Cmd>NvimTreeToggle<CR>", {})
+-- toggle highlights
+-- " switch higlight no matter the previous state
+lvim.keys.normal_mode["<leader>h"] = ':set hls! <cr>'
+-- " hit '/' highlights then enter search mode
+vim.api.nvim_set_keymap('n', '/',':set hlsearch<cr>/',  {noremap = true}) 
+-- prob. best option: nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
+
+vim.api.nvim_set_keymap('', '<localleader>a', "<Cmd>NvimTreeToggle<CR>", {})
 vim.api.nvim_set_keymap('', '<localleader>e', "<Cmd>NvimTreeToggle<CR>", {})
 vim.api.nvim_set_keymap('', '<localleader>a', "<Cmd>NvimTreeToggle<CR>", {})
 vim.api.nvim_set_keymap('', '<c-b>', ":bd<CR>", { })
@@ -28,10 +35,19 @@ vim.cmd([[
 ]])
 -- vim.api.nvim_set_keymap('', '<F4>', ':lua vim.api.nvim_buf_set_lines(0, vim.api.nvim_win_get_cursor(win)[1], vim.api.nvim_win_get_cursor(win)[1], false, {os.date("%Y-%m-%d")})<cr>', { })
 
+
+
 vim.cmd([[
   cnoremap <expr> <Up>  pumvisible() ? "\<C-p>" : "\<Up>"
   cnoremap <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
 ]])
+
+-- TODO: potentially as the current behaviour has its own advantages
+-- vim.api.nvim_set_keymap("", "\\<Up>", "require('cmp').mapping.select_prev_item()", { expr = true, noremap = true })
+-- vim.api.nvim_set_keymap("", "\\<Down>", "require('cmp').mapping.select_next_item()", { expr = true, noremap = true })
+
+lvim.keys.normal_mode["wg"]  = '<cmd>call utils#toggle_background()<CR>'
+
 
 vim.cmd([[
     nnoremap  [Window]   <Nop>
@@ -51,7 +67,7 @@ vim.cmd([[
     nnoremap [Window]h <cmd>split<CR>:wincmd p<CR>:e#<CR>
     nnoremap [Window]v <cmd>vsplit<CR>:wincmd p<CR>:e#<CR>
 
-    nmap [Window]g <cmd>call utils#toggle_background()<CR>
+    nnoremap [Window]g '<cmd>call utils#toggle_background()<CR>'
 
 		nnoremap <silent> [Window]n  :tabnext<CR>
 		nnoremap <silent> [Window]p  :tabprev<CR>
