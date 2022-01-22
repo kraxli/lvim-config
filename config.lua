@@ -2,6 +2,7 @@
 -- =========================================
 lvim.format_on_save = false
 lvim.leader = " "
+vim.g.maplocalleader = ','
 lvim.colorscheme = "pablo"
 lvim.debug = false
 vim.lsp.set_log_level "warn"
@@ -15,14 +16,14 @@ lvim.builtin.lastplace = { active = false } -- change to false if you are jumpin
 lvim.builtin.tabnine = { active = true } -- change to false if you don't like tabnine
 lvim.builtin.persistence = { active = true } -- change to false if you don't want persistence
 lvim.builtin.presence = { active = false } -- change to true if you want discord presence
-lvim.builtin.orgmode = { active = false } -- change to true if you want orgmode.nvim
-lvim.builtin.dap.active = false -- change this to enable/disable debugging
+lvim.builtin.orgmode = { active = true } -- change to true if you want orgmode.nvim
+lvim.builtin.dap.active = true -- change this to enable/disable debugging
 lvim.builtin.fancy_statusline = { active = true } -- enable/disable fancy statusline
 lvim.builtin.fancy_bufferline = { active = true } -- enable/disable fancy bufferline
 lvim.builtin.fancy_dashboard = { active = true } -- enable/disable fancy dashboard
 lvim.builtin.fancy_wild_menu = { active = false } -- enable/disable use wilder.nvim
 lvim.builtin.fancy_rename = { active = true } -- enable/disable custom rename
-lvim.builtin.fancy_diff = { active = false } -- enable/disable fancier git diff
+lvim.builtin.fancy_diff = { active = true } -- enable/disable fancier git diff
 lvim.builtin.lua_dev = { active = true } -- change this to enable/disable folke/lua_dev
 lvim.builtin.test_runner = { active = true } -- change this to enable/disable vim-test, ultest
 lvim.builtin.cheat = { active = true } -- enable cheat.sh integration
@@ -35,20 +36,21 @@ lvim.builtin.remote_dev = { active = false } -- enable/disable remote developmen
 lvim.builtin.cursorline = { active = false } -- use a bit fancier cursorline
 lvim.builtin.motion_provider = "hop" -- change this to use different motion providers ( hop or lightspeed )
 lvim.builtin.hlslens = { active = false } -- enable/disable hlslens
-lvim.builtin.csv_support = false -- enable/disable csv support
-lvim.builtin.sidebar = { active = false } -- enable/disable sidebar
-lvim.builtin.async_tasks = { active = false } -- enable/disable async tasks
+lvim.builtin.csv_support = true -- enable/disable csv support
+lvim.builtin.sidebar = { active = true } -- enable/disable sidebar
+lvim.builtin.async_tasks = { active = true } -- enable/disable async tasks
 lvim.builtin.metals = {
   active = false, -- enable/disable nvim-metals for scala development
   fallbackScalaVersion = "2.13.7",
   serverVersion = "0.10.9+271-a8bb69f6-SNAPSHOT",
 }
 lvim.builtin.collaborative_editing = { active = false } -- enable/disable collaborative editing
+  lvim.lsp.document_highlight = true
 
 local user = os.getenv "USER"
-if user and user == "abz" then
+if user and (user == "dave" or user == "s6s94k") then  -- abz
   lvim.builtin.nvim_web_devicons = { active = false }
-  lvim.builtin.sell_your_soul_to_devil = true
+  lvim.builtin.sell_your_soul_to_devil = false -- true
   lvim.lsp.document_highlight = false
   lvim.builtin.csv_support = true
   lvim.builtin.async_tasks.active = true
@@ -65,7 +67,7 @@ lvim.builtin.latex = {
   rtl_support = true, -- if you want to use xelatex, it's a bit slower but works very well for RTL langs
 }
 lvim.builtin.notify.active = true
-lvim.lsp.automatic_servers_installation = false
+lvim.lsp.automatic_servers_installation = true -- false
 if lvim.builtin.cursorline.active then
   lvim.lsp.document_highlight = false
 end
@@ -88,7 +90,7 @@ end
 -- =========================================
 vim.list_extend(
   lvim.lsp.override,
-  { "rust_analyzer", "tsserver", "dockerls", "texlab", "sumneko_lua", "gopls", "jsonls", "yamlls" }
+  { "rust_analyzer", "tsserver", "dockerls", "texlab", "sumneko_lua", "gopls", "jsonls", "yamlls", "pyright" }
 )
 require("user.null_ls").config()
 
@@ -103,3 +105,7 @@ require("user.autocommands").config()
 -- Additional keybindings
 -- =========================================
 require("user.keybindings").config()
+
+-- Additional settings (kraxli)
+-- =========================================
+require("config")
