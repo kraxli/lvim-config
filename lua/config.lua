@@ -16,7 +16,6 @@ vim.opt.redrawtime=2000  --- Time in milliseconds for stopping display redraw
 -- lvim.colorscheme = "one-nvim" --  "onedarker"
 vim.o.background = 'light'
 
-
 -- load specific configurations
 -------------------------------------------------------
 require("config.commands")
