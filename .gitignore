@@ -6,6 +6,9 @@ luac.out
 *.zip
 *.tar.gz
 
+# Cached
+*.luacheckcache
+
 # Object files
 *.o
 *.os
