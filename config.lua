@@ -45,7 +45,8 @@ lvim.builtin.metals = {
   serverVersion = "0.10.9+271-a8bb69f6-SNAPSHOT",
 }
 lvim.builtin.collaborative_editing = { active = false } -- enable/disable collaborative editing
-  lvim.lsp.document_highlight = true
+  -- lvim.lsp.document_highlight = true
+lvim.builtin.file_browser = { active = false } -- enable/disable telescope file browser
 
 local user = os.getenv "USER"
 if user and (user == "dave" or user == "s6s94k") then  -- abz
@@ -58,6 +59,7 @@ if user and (user == "dave" or user == "s6s94k") then  -- abz
   lvim.builtin.sql_integration.active = true
   vim.g.instant_username = user
   lvim.builtin.collaborative_editing.active = true
+  lvim.builtin.file_browser.active = true
   require("user.prose").config() -- setup prosemd-lsp for my local use
 end
 lvim.lsp.diagnostics.virtual_text = false -- remove this line if you want to see inline errors
@@ -90,7 +92,7 @@ end
 -- =========================================
 vim.list_extend(
   lvim.lsp.override,
-  { "rust_analyzer", "tsserver", "dockerls", "texlab", "sumneko_lua", "gopls", "jsonls", "yamlls", "pyright" }
+  { "rust_analyzer", "tsserver", "dockerls", "texlab", "sumneko_lua", "gopls", "jsonls", "yamlls", "r_language_server", "pyright" }
 )
 require("user.null_ls").config()
 
