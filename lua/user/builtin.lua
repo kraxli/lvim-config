@@ -8,10 +8,10 @@ M.config = function()
 
   -- Autopairs
   -- =========================================
-  lvim.builtin.autopairs.on_config_done = function(autopairs)
-    autopairs.remove_rule("$$", "$$", "tex")
-    autopairs.remove_rule("$", "$", { "tex", "latex" })
-  end
+  -- lvim.builtin.autopairs.on_config_done = function(autopairs)
+  --   local Rule = require "nvim-autopairs.rule"
+  --   autopairs.add_rule(Rule("$$", "$$", "tex"))
+  -- end
 
   -- Command Palette
   -- =========================================
@@ -145,7 +145,7 @@ M.config = function()
   lvim.builtin.treesitter.ensure_installed = "maintained"
   lvim.builtin.treesitter.highlight.disable = { "org" }
   lvim.builtin.treesitter.highlight.aditional_vim_regex_highlighting = { "org" }
-  lvim.builtin.treesitter.ignore_install = { "haskell" }
+  lvim.builtin.treesitter.ignore_install = { "haskell", "norg" }
   lvim.builtin.treesitter.incremental_selection = {
     enable = true,
     keymaps = {
@@ -331,11 +331,15 @@ M.config = function()
   lvim.builtin.telescope.on_config_done = function(telescope)
     telescope.load_extension "file_create"
     telescope.load_extension "command_palette"
+    if lvim.builtin.file_browser.active then
+      telescope.load_extension "file_browser"
+    end
   end
 
   -- Terminal
   -- =========================================
   lvim.builtin.terminal.active = true
+  lvim.builtin.terminal.open_mapping = [[<c-\>]]
 
   -- WhichKey
   -- =========================================
@@ -348,6 +352,7 @@ M.config = function()
       ["gR"] = { "<cmd>Trouble lsp_references<CR>", "Goto References" },
       ["gI"] = { "<cmd>lua require('user.telescope').lsp_implementations()<CR>", "Goto Implementation" },
       ["gA"] = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
+      ["gt"] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
     }
     wk.register(keys, { mode = "n" })
   end

@@ -460,11 +460,16 @@ M.config = function()
             },
             complex = {
               [".clang*"] = "yaml",
+              [".*%.env.*"] = "sh",
+              [".*ignore"] = "conf",
             },
             extensions = {
               tf = "terraform",
               tfvars = "terraform",
               tfstate = "json",
+              eslintrc = "json",
+              prettierrc = "json",
+              mdx = "markdown",
             },
           },
         }
@@ -579,6 +584,16 @@ M.config = function()
       "jbyuki/instant.nvim",
       event = "BufRead",
       disable = not lvim.builtin.collaborative_editing.active,
+    },
+    {
+      "nvim-telescope/telescope-file-browser.nvim",
+      disable = not lvim.builtin.file_browser.active,
+    },
+    {
+      "j-hui/fidget.nvim",
+      config = function()
+        require("user.fidget_spinner").config()
+      end,
     },
   }
 end
