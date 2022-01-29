@@ -3,7 +3,7 @@
 lvim.format_on_save = false
 lvim.leader = " "
 vim.g.maplocalleader = ','
-lvim.colorscheme = "pablo"
+-- lvim.colorscheme = "one-nvim" -- "pablo"
 lvim.debug = false
 vim.lsp.set_log_level "warn"
 lvim.log.level = "warn"
@@ -23,7 +23,7 @@ lvim.builtin.fancy_bufferline = { active = true } -- enable/disable fancy buffer
 lvim.builtin.fancy_dashboard = { active = true } -- enable/disable fancy dashboard
 lvim.builtin.fancy_wild_menu = { active = false } -- enable/disable use wilder.nvim
 lvim.builtin.fancy_rename = { active = true } -- enable/disable custom rename
-lvim.builtin.fancy_diff = { active = true } -- enable/disable fancier git diff
+lvim.builtin.fancy_diff = { active = false } -- enable/disable fancier git diff
 lvim.builtin.lua_dev = { active = true } -- change this to enable/disable folke/lua_dev
 lvim.builtin.test_runner = { active = true } -- change this to enable/disable vim-test, ultest
 lvim.builtin.cheat = { active = true } -- enable cheat.sh integration
@@ -37,7 +37,7 @@ lvim.builtin.cursorline = { active = false } -- use a bit fancier cursorline
 lvim.builtin.motion_provider = "hop" -- change this to use different motion providers ( hop or lightspeed )
 lvim.builtin.hlslens = { active = false } -- enable/disable hlslens
 lvim.builtin.csv_support = true -- enable/disable csv support
-lvim.builtin.sidebar = { active = true } -- enable/disable sidebar
+lvim.builtin.sidebar = { active = false } -- enable/disable sidebar
 lvim.builtin.async_tasks = { active = true } -- enable/disable async tasks
 lvim.builtin.metals = {
   active = false, -- enable/disable nvim-metals for scala development
