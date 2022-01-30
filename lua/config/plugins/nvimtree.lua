@@ -3,13 +3,6 @@ require'nvim-tree'.setup {
   disable_netrw = false,
 }
 
-
-vim.api.nvim_set_keymap('', '<localleader>a', "<Cmd>NvimTreeToggle<CR>", {})
-vim.api.nvim_set_keymap('', '<localleader>e', "<Cmd>NvimTreeToggle<CR>", {})
-vim.api.nvim_set_keymap('', '<localleader>a', "<Cmd>NvimTreeToggle<CR>", {})
-vim.api.nvim_set_keymap('', '<c-b>', ":bd<CR>", { })
-
-
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
     lvim.builtin.nvimtree.setup.view.mappings.list = {
       { key = "h", cb = tree_cb "close_node" },

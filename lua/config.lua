@@ -23,8 +23,10 @@ require("install.plugins")
 -- load specific configurations
 -------------------------------------------------------
 require("config.commands")
-require("config.mappings")
+require("config.mappings").unmapKeys()
+require("config.mappings").generalVimKeys()
 vim.cmd([[au! BufEnter * lua require("config.mappings").which_key_mappings()]])
+vim.cmd([[au! BufEnter * lua require("config.mappings").nerdtree()]])
 
 require("config.plugins.nvimtree")
 require("config.plugins.telescope")
