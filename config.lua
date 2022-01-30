@@ -108,22 +108,6 @@ require("user.autocommands").config()
 -- =========================================
 require("user.keybindings").config()
 
-
--- vim.cmd([[
---   echomsg "start"
---   autocmd!
-
---   " autocmd BufEnter * call Log("BufEnter")
---   autocmd BufWinEnter * call Log("BufWinEnter")
---   autocmd FileType * call Log("FileType")
---   autocmd BufNewFile * call Log('BufNewFile')
---   autocmd BufReadPre * call Log('BufReadPre')
-
--- function! Log(eventName) abort
---   execute '!echo '.a:eventName.' >> log'
--- endfunction
--- ]])
-
 -- Additional settings (kraxli)
 -- =========================================
 require("config")
