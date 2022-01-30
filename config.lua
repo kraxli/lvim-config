@@ -45,14 +45,14 @@ lvim.builtin.metals = {
   serverVersion = "0.10.9+271-a8bb69f6-SNAPSHOT",
 }
 lvim.builtin.collaborative_editing = { active = false } -- enable/disable collaborative editing
-  -- lvim.lsp.document_highlight = true
+lvim.lsp.document_highlight = true
 lvim.builtin.file_browser = { active = false } -- enable/disable telescope file browser
 
 local user = os.getenv "USER"
 if user and (user == "dave" or user == "s6s94k") then  -- abz
-  lvim.builtin.nvim_web_devicons = { active = false }
+  lvim.builtin.nvim_web_devicons = { active = true }
   lvim.builtin.sell_your_soul_to_devil = false -- true
-  lvim.lsp.document_highlight = false
+  lvim.lsp.document_highlight = true
   lvim.builtin.csv_support = true
   lvim.builtin.async_tasks.active = true
   lvim.builtin.dap.active = true
@@ -108,6 +108,24 @@ require("user.autocommands").config()
 -- =========================================
 require("user.keybindings").config()
 
+
+-- vim.cmd([[
+--   echomsg "start"
+--   autocmd!
+
+--   " autocmd BufEnter * call Log("BufEnter")
+--   autocmd BufWinEnter * call Log("BufWinEnter")
+--   autocmd FileType * call Log("FileType")
+--   autocmd BufNewFile * call Log('BufNewFile')
+--   autocmd BufReadPre * call Log('BufReadPre')
+
+-- function! Log(eventName) abort
+--   execute '!echo '.a:eventName.' >> log'
+-- endfunction
+-- ]])
+
 -- Additional settings (kraxli)
 -- =========================================
 require("config")
+
+
