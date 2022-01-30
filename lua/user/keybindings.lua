@@ -320,6 +320,7 @@ M.config = function()
   -- Navigate merge conflict markers
   local whk_status, whk = pcall(require, "which-key")
   if not whk_status then
+    print("whick-key in user/keybindings not loaded")
     return
   end
   whk.register {
