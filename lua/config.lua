@@ -2,6 +2,7 @@
 -- general
 -------------------------------------------------------
 vim.g.maplocalleader = ','
+vim.wo.relativenumber = false
 
 
 -- timeing:
