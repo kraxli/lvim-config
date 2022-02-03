@@ -51,7 +51,17 @@ local plugins = {
 
     -- colors
 		{
-        "Th3Whit3Wolf/one-nvim"
+      "Th3Whit3Wolf/one-nvim",
+      config = function()
+        require("user.theme").kanagawa()
+        vim.cmd [[colorscheme kanagawa]]
+      end,
+      cond = function()
+        local _time = os.date "*t"
+        return (_time.hour >= 21 and _time.hour < 24) or (_time.hour >= 0 and _time.hour < 1)
+      end,
+
+
     },
 
     -- cond = function()
