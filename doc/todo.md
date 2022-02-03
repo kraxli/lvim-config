@@ -1,6 +1,7 @@
 
 # To Dos
 
+- [ ] close Telescope with "q"
 - [ ] how to format with Lsp-formatter
 - [X] LSP signature plugin?
 - [ ] DAP: functionality:

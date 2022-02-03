@@ -1,9 +1,58 @@
--- lvim.plugins = {
+local plugins = {
+
+
+    -- cwd to the project's root directory
+    {
+      "ahmedkhalf/lsp-rooter.nvim",
+      event = "BufRead",
+      config = function()
+        require("lsp-rooter").setup()
+      end,
+    },
+
+    -- switch between projects
+    {
+      "nvim-telescope/telescope-project.nvim",
+      event = "BufWinEnter",
+      setup = function()
+        vim.cmd [[packadd telescope.nvim]]
+      end,
+    },
+
+    -- -- lsp
+    -- {
+    --     "ray-x/lsp_signature.nvim",
+    --     config = function() require"lsp_signature".on_attach({toggle_key = '<M-a>', hi_parameter = "LspSignatureActiveParameter"}) end,
+    --     event = "BufRead", -- for setup
+    -- },
+
+    -- R support
+    {"jalvesaq/Nvim-R"},
+
+    -- lua in Neovim debug support
+    {
+      "jbyuki/one-small-step-for-vimkind",
+      ft = { "lua" },
+      -- setup = function() require("config.plugins.dap") end,
+    },
+
+    -- notetaking, wiki, markdonw, tex
+    {
+      'renerocksai/calendar-vim',
+    },
+
+    {
+      "renerocksai/telekasten.nvim",
+    },
+
+    -- telescope-symbols.nvim
+    -- vim-markdown-toc
+    -- telescope-media-files
+
     -- colors
-    -------------------------------------------------------
-		-- {
-    --     "Th3Whit3Wolf/one-nvim"
-    --   },
+		{
+        "Th3Whit3Wolf/one-nvim"
+    },
 
     -- cond = function()
     --   -- require("user.theme").doom()
@@ -18,4 +67,12 @@
    -- {"Th3Whit3Wolf/onebuddy"},
    -- {"Mofiqul/vscode.nvim"},
    -- {"rafamadriz/neon"},
--- }
+}
+
+
+-- table.merge(lvim.plugins, plugins)
+-- lvim.plugins = table.combine(lvim.plugins, plugins)
+for _, v in ipairs(plugins) do
+   table.insert(lvim.plugins, v)
+end
+
