@@ -43,4 +43,4 @@ luac.out
 plugin/
 
 # External tools
-*vale
+*.vale
