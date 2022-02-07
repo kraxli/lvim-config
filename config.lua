@@ -46,7 +46,7 @@ lvim.builtin.metals = {
 }
 lvim.builtin.collaborative_editing = { active = false } -- enable/disable collaborative editing
 lvim.lsp.document_highlight = true
-lvim.builtin.file_browser = { active = true } -- enable/disable telescope file browser
+lvim.builtin.file_browser = { active = false } -- enable/disable telescope file browser
 
 local user = os.getenv "USER"
 if user and (user == "dave" or user == "s6s94k") then  -- abz
@@ -107,3 +107,27 @@ require("user.autocommands").config()
 -- Additional keybindings
 -- =========================================
 require("user.keybindings").config()
+
+-- =======================================================
+-- Additional settings (kraxli)
+-- =======================================================
+require("config.general")
+
+-- load install file(s)
+require("install.plugins")
+
+-- load specific configurations
+-- -------------------------------------------------------
+require("config.commands")
+require("config.mappings").unmapKeys()
+require("config.mappings").generalVimKeys()
+vim.cmd([[au! BufEnter * lua require("config.which_keys")]])
+
+require("config.plugins.nvimtree")
+require("config.plugins.telescope")
+require("config.plugins.lsp")
+require("config.plugins.dap")
+require("config.plugins.trouble")
+
+-- require("plugins.vimwiki")
+
