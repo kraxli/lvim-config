@@ -3,7 +3,7 @@
 lvim.format_on_save = false
 lvim.leader = " "
 vim.g.maplocalleader = ','
--- lvim.colorscheme = "one-nvim" -- "pablo"
+-- lvim.colorscheme = "tokyonight" -- "one-nvim" -- "pablo"
 lvim.debug = false
 vim.lsp.set_log_level "warn"
 lvim.log.level = "warn"
@@ -108,9 +108,26 @@ require("user.autocommands").config()
 -- =========================================
 require("user.keybindings").config()
 
+-- =======================================================
 -- Additional settings (kraxli)
--- =========================================
-require("install.plugins")
-require("config")
+-- =======================================================
+require("config.general")
 
+-- load install file(s)
+require("install.plugins")
+
+-- load specific configurations
+-- -------------------------------------------------------
+require("config.commands")
+require("config.mappings").unmapKeys()
+require("config.mappings").generalVimKeys()
+vim.cmd([[au! BufEnter * lua require("config.which_keys")]])
+
+require("config.plugins.nvimtree")
+require("config.plugins.telescope")
+require("config.plugins.lsp")
+require("config.plugins.dap")
+require("config.plugins.trouble")
+
+-- require("plugins.vimwiki")
 

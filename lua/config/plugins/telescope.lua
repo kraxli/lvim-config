@@ -1,6 +1,7 @@
 -- local M = {}
 
--- TODO: close telescope with q
+-- close telescope with q
+vim.cmd('au! Filetype TelescopePrompt nmap q <esc>')
 
 vim.cmd('command! Zoxide lua require"plugins.telescope".pickers.zoxide()')
 
@@ -9,7 +10,6 @@ local preloadTelescope = function()
 	local keymap = vim.api.nvim_set_keymap
 	local opts = { noremap = true, silent = true }
 
-  -- TODO: whichkey:
 	-- General pickers
 	keymap('n', '<localleader>b', '<cmd>Telescope buffers<CR>', opts)
 	keymap('n', '<localleader>f', '<cmd>Telescope find_files<CR>', opts)
@@ -52,9 +52,11 @@ local preloadTelescope = function()
 
   lvim.builtin.which_key.mappings["gb"] = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Current Buffer" }
   -- lvim.builtin.which_key.mappings["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Current Buffer" }
-  lvim.builtin.which_key.mappings["gt"] = { '<cmd>lua require"plugins.telescope".pickers.lsp_workspace_symbols_cursor()<CR>', "Symbols" }
-  lvim.builtin.which_key.mappings["gf"] = { '<cmd>lua require"plugins.telescope".pickers.find_files_cursor()<CR>', "Files cursor" }
-  lvim.builtin.which_key.mappings["gg"] = { '<cmd>lua require"plugins.telescope".pickers.grep_string_cursor()<CR>', "String cursor" }
+
+  -- FIX:
+  -- lvim.builtin.which_key.mappings["gt"] = { '<cmd>lua require"plugins.telescope".pickers.lsp_workspace_symbols_cursor()<CR>', "Symbols" }
+  -- lvim.builtin.which_key.mappings["gf"] = { '<cmd>lua require"plugins.telescope".pickers.find_files_cursor()<CR>', "Files cursor" }
+  -- lvim.builtin.which_key.mappings["g???"] = { '<cmd>lua require"plugins.telescope".pickers.grep_string_cursor()<CR>', "String cursor" }
 
 	-- LSP related
 	keymap('n', '<localleader>dd', '<cmd>Telescope lsp_definitions<CR>', opts)

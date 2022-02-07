@@ -82,3 +82,14 @@ else
   }, { prefix = "<localleader>", mode="n" })
 end
 
+-------------------------------------------------------
+-- GIT --
+-------------------------------------------------------
+
+-- Neogit --
+lvim.builtin.which_key.mappings["gm"] = {"<cmd>Neogit<CR>", "Magit" }  -- noremap=true
+
+lvim.builtin.which_key.mappings["gy"] = {"<cmd>lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>", 'Lazygit'}
+
+
+

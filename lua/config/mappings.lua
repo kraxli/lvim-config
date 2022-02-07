@@ -52,6 +52,20 @@ M.generalVimKeys = function()
   -- vim.api.nvim_set_keymap("", "\\<Down>", "require('cmp').mapping.select_next_item()", { expr = true, noremap = true })
   -- lvim.keys.normal_mode["wg"]  = '<cmd>call utils#toggle_background()<CR>'
 
+  -- OPEN file, url, or directory
+  lvim.keys.normal_mode["gx"] = false
+  lvim.keys.normal_mode["<F6>"] = false
+
+  commandsOpen = {unix="xdg-open", mac="open"}
+  if vim.fn.has "mac" == 1 then osKey = "mac" elseif vim.fn.has "unix" == 1 then osKey = "unix" end
+  local openFileUrl = [[<cmd>lua os.execute(commandsOpen[osKey] .. " " .. vim.fn.shellescape(vim.fn.expand "<cWORD>")); vim.cmd "redraw!"<cr>]]
+  local openDir = [[<cmd>lua os.execute(commandsOpen[osKey] .. ' ' .. vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand('<sfile>'), ':p'))); vim.cmd "redraw!"<cr>]]
+  local openAll = [[<cmd>lua cword = vim.fn.expand("<cWORD>"); if string.len(cword) ~= 0 then arg = vim.fn.shellescape(cword) else arg = vim.fn.shellescape(vim.fn.fnamemodify(vim.fn.expand("<sfile>"), ":p")) end; print(arg); os.execute(commandsOpen[osKey] .. ' ' .. arg); vim.cmd "redraw!"<cr>]]
+
+  lvim.keys.normal_mode["<F6>"] = openDir
+  -- lvim.keys.normal_mode["gx"] = openFileUrl
+  lvim.keys.normal_mode["gx"] = openAll
+
   -- rafi
   vim.cmd([[
     " Re-select blocks after indenting in visual/select mode

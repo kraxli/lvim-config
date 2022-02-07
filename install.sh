@@ -8,6 +8,14 @@ sudo apt-get install xclip
 python3 -m pip install pyright pyls
 sudo python3 -m pip install pyright pyls
 
+# -- Lazy git --
+
+sudo add-apt-repository ppa:lazygit-team/release
+sudo apt-get update
+sudo apt-get install lazygit
+
+# =======================================================
+
 # brew install luarocks
 # luarocks install luacheck  # if you want to use luacheck
 cargo install selene  # if you want to use selene instead of luacheck
