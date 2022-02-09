@@ -3,10 +3,10 @@ local M = {}
 M.unmapKeys = function ()
   -- unmap keys
   lvim.keys.normal_mode["<leader>c"] = false  -- close buffer: <c-b>
-  lvim.builtin.which_key.mappings["c"] = {}
   lvim.keys.normal_mode["<leader>w"] = false  -- save: <c-q>
-  lvim.builtin.which_key.mappings["w"] = {}
-  -- TODO: unmap <c-z>
+  lvim.keys.normal_mode["y"] = false
+  lvim.keys.normal_mode["<s-x>"] = false
+  lvim.keys.normal_mode["<c-z>"] = false
 end
 
 M.generalVimKeys = function()
@@ -19,6 +19,7 @@ M.generalVimKeys = function()
   -- lvim.keys.normal_mode["<C-Up>"] = ""
   -- edit a default keymapping
 
+  vim.api.nvim_set_keymap('', '<c-b>', ":bd<CR>", { })
   lvim.keys.normal_mode["<C-q>"] = ":bd<cr>"
   lvim.keys.normal_mode["q"] = ":bd<cr>"
   -- vim.api.nvim_set_keymap('', '<c-b>', ":bd<CR>", {})
@@ -80,6 +81,9 @@ M.generalVimKeys = function()
     nmap >  >>_
     nmap <  <<_
   ]])
+
+  -- TODO: handle re-selct gv
+
 
   -- EXAMPLES:
   -- v  <Space>/    * <Esc><Cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>
