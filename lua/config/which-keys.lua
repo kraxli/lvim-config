@@ -24,6 +24,7 @@ local mapsNormNoPrefix = {
     --Split current buffer, go to previous window and previous buffer
     h = { '<cmd>split<CR>:wincmd p<CR>:e#<CR>', "Split horizontal"},
     v = { '<cmd>vsplit<CR>:wincmd p<CR>:e#<CR>', "Split vertical"},
+      -- lvim.keys.normal_mode["gv"] = "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>"
     t = { '<cmd>tabnew<CR>', "Tab new"},
     n = { '<cmd>tabnext<CR>', "Tab next"},
     p = { '<cmd>tabprev<CR>', "Tab previous"},
@@ -59,11 +60,11 @@ local mapsNormLocLeader = {
     -- Telescope LSP related
     d = {
       name = "Lsp",
-      dd = {'<cmd>Telescope lsp_definitions<CR>', "Lsp definitions"},
-      di = {'<cmd>Telescope lsp_implementations<CR>', "Lsp implementations"},
-      dr = {'<cmd>Telescope lsp_references<CR>', "Lsp references"},
-      da = {'<cmd>Telescope lsp_code_actions<CR>', "Lsp code actions"},
-      da = {'<cmd>Telescope lsp_range_code_actions<CR>', "Lsp range code actions"},
+      d = {'<cmd>Telescope lsp_definitions<CR>', "Lsp definitions"},
+      i = {'<cmd>Telescope lsp_implementations<CR>', "Lsp implementations"},
+      r = {'<cmd>Telescope lsp_references<CR>', "Lsp references"},
+      a = {'<cmd>Telescope lsp_code_actions<CR>', "Lsp code actions"},
+      a = {'<cmd>Telescope lsp_range_code_actions<CR>', "Lsp range code actions"},
     },
 
     -- Nvimtree
@@ -100,4 +101,5 @@ end
 -- Neogit --
 lvim.builtin.which_key.mappings["gm"] = {"<cmd>Neogit<CR>", "Magit" }  -- noremap=true
 lvim.builtin.which_key.mappings["gy"] = {"<cmd>lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>", 'Lazygit'}
+lvim.builtin.which_key.mappings["gg"] = {"<cmd>lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>", 'Lazygit'}
 
