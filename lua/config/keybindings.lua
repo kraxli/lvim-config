@@ -7,6 +7,7 @@ M.unmapKeys = function ()
   lvim.keys.normal_mode["y"] = false
   lvim.keys.normal_mode["<s-x>"] = false
   lvim.keys.normal_mode["<c-z>"] = false
+  lvim.keys.normal_mode["q"] = false
 end
 
 M.generalVimKeys = function()
@@ -19,10 +20,8 @@ M.generalVimKeys = function()
   -- lvim.keys.normal_mode["<C-Up>"] = ""
   -- edit a default keymapping
 
-  vim.api.nvim_set_keymap('', '<c-b>', ":bd<CR>", { })
-  lvim.keys.normal_mode["<C-q>"] = ":bd<cr>"
-  lvim.keys.normal_mode["q"] = ":bd<cr>"
-  -- vim.api.nvim_set_keymap('', '<c-b>', ":bd<CR>", {})
+  lvim.keys.normal_mode["q"] = '<cmd>quit<cr>'
+  lvim.keys.normal_mode["<c-q>"] = "<cmd>bd<cr>"  -- ":bd<cr>"
 
   vim.api.nvim_set_keymap('', '<c-PageDown>', "<Cmd>bp<CR>", {})
   vim.api.nvim_set_keymap('', '<c-PageUp>', "<Cmd>bn<CR>", {})

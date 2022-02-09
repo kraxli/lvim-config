@@ -24,11 +24,21 @@ local mapsNormNoPrefix = {
     --Split current buffer, go to previous window and previous buffer
     h = { '<cmd>split<CR>:wincmd p<CR>:e#<CR>', "Split horizontal"},
     v = { '<cmd>vsplit<CR>:wincmd p<CR>:e#<CR>', "Split vertical"},
-      -- lvim.keys.normal_mode["gv"] = "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>"
     t = { '<cmd>tabnew<CR>', "Tab new"},
     n = { '<cmd>tabnext<CR>', "Tab next"},
     p = { '<cmd>tabprev<CR>', "Tab previous"},
-  }
+  },
+
+   -- Telescope LSP related
+  l = {
+    name = "Lsp",
+    d = {'<cmd>Telescope lsp_definitions<CR>', "Lsp definitions"},
+    i = {'<cmd>Telescope lsp_implementations<CR>', "Lsp implementations"},
+    r = {'<cmd>Telescope lsp_references<CR>', "Lsp references"},
+    a = {'<cmd>Telescope lsp_code_actions<CR>', "Lsp code actions"},
+    c = {'<cmd>Telescope lsp_range_code_actions<CR>', "Lsp range code actions"},
+    v = {"<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Definition vsplit"},
+  },
 }
 
 local mapsNormLocLeader = {
@@ -57,23 +67,13 @@ local mapsNormLocLeader = {
     n = { '<cmd>lua require"plugins.telescope".pickers.plugin_directories()<CR>', "Directories"},
     w = { '<cmd>lua require"plugins.telescope".pickers.notebook()<CR>', "Notebook"},
 
-    -- Telescope LSP related
-    d = {
-      name = "Lsp",
-      d = {'<cmd>Telescope lsp_definitions<CR>', "Lsp definitions"},
-      i = {'<cmd>Telescope lsp_implementations<CR>', "Lsp implementations"},
-      r = {'<cmd>Telescope lsp_references<CR>', "Lsp references"},
-      a = {'<cmd>Telescope lsp_code_actions<CR>', "Lsp code actions"},
-      a = {'<cmd>Telescope lsp_range_code_actions<CR>', "Lsp range code actions"},
-    },
-
     -- Nvimtree
     a = { "<Cmd>NvimTreeToggle<CR>", "Nvimtree toggle"},
     e = { "<Cmd>NvimTreeToggle<CR>", "Nvimtree toggle"},
 }
 
 
-local mapsXmodeLocLeader = { 
+local mapsXmodeLocLeader = {
 
   -- Telescope
   g = {'<cmd>lua require"plugins.telescope".pickers.grep_string_visual()<cr>', "Grep cursor word"},
@@ -93,6 +93,21 @@ else
   whk.register(mapsNormLocLeader, optsNormLocLeader)
   whk.register(mapsXmodeLocLeader, optsXmodeLocLeader)
 end
+
+-------------------------------------------------------
+-- LSP --
+-------------------------------------------------------
+
+-- Telescope Lsp
+lvim.builtin.which_key.mappings['lA'] = {'<cmd>Telescope lsp_range_code_actions<CR>', "Lsp range code actions"}
+lvim.builtin.which_key.mappings['lD'] = {'<cmd>Telescope lsp_definitions<CR>', "Lsp definitions"}
+lvim.builtin.which_key.mappings['lI'] = {'<cmd>Telescope lsp_implementations<CR>', "Lsp implementations"}
+lvim.builtin.which_key.mappings['lz'] = {'<cmd>Telescope lsp_references<CR>', "Lsp references"}
+lvim.builtin.which_key.mappings['lR'] = {'<cmd>Telescope lsp_references<CR>', "Lsp references"}
+-- a = {'<cmd>Telescope lsp_code_actions<CR>', "Lsp code actions"},
+
+-- Other Lsp
+lvim.builtin.which_key.mappings['lv'] = {"<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Definition vsplit"}
 
 -------------------------------------------------------
 -- GIT --
