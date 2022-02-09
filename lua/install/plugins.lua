@@ -1,8 +1,20 @@
 local plugins = {
 
+  -------------------------------------------------------
   -- General
+  -------------------------------------------------------
+  {
+    {'chentau/marks.nvim'},
+    requires = "gitsigns.nvim",
+    event = "FileType",
+    config = function ()
+      require('config.plugins.marks')
+    end
+  },
 
-  -- GIT
+  -------------------------------------------------------
+  -- GIT --
+  -------------------------------------------------------
   {
     "TimUntersberger/neogit",
     requires = {'nvim-lua/plenary.nvim', 'diffview.nvim'},
@@ -11,6 +23,7 @@ local plugins = {
       require('config.plugins.neogit')
     end
   },
+
     -- cwd to the project's root directory
   {
     "ahmedkhalf/lsp-rooter.nvim",
@@ -31,7 +44,9 @@ local plugins = {
 
 
 
+  -------------------------------------------------------
   -- -- lsp
+  -------------------------------------------------------
   -- {
   --     "ray-x/lsp_signature.nvim",
   --     config = function() require"lsp_signature".on_attach({toggle_key = '<M-a>', hi_parameter = "LspSignatureActiveParameter"}) end,
@@ -54,9 +69,9 @@ local plugins = {
   },
 
 
-
-
-
+  -------------------------------------------------------
+  -- Markdown, Wiki, Notes, Tex, ...
+  -------------------------------------------------------
   -- TODO:
   {
     "renerocksai/telekasten.nvim",
@@ -66,7 +81,9 @@ local plugins = {
   -- vim-markdown-toc
   -- telescope-media-files
 
+  -------------------------------------------------------
   -- colors
+  -------------------------------------------------------
 	{
     "Th3Whit3Wolf/one-nvim",
     config = function()
