@@ -119,15 +119,16 @@ require("install.plugins")
 -- load specific configurations
 -- -------------------------------------------------------
 require("config.commands")
+require("config.commands").telescope()
 require("config.keybindings").unmapKeys()
 require("config.keybindings").generalVimKeys()
+require("config.keybindings").telescope()
 vim.cmd([[au! BufEnter * lua require("config.which-keys")]])
 
 require("config.plugins.nvimtree")
 require("config.plugins.telescope")
 require("config.plugins.lsp")
 require("config.plugins.dap")
-require("config.plugins.trouble")
 
 -- require("plugins.vimwiki")
 

@@ -92,4 +92,9 @@ M.generalVimKeys = function()
   -- vim.api.nvim_set_keymap('n', '<c-c>', "<cmd>BufferClose!<CR>", {})
 end
 
+M.telescope = function()
+  -- close telescope with q
+  vim.cmd('au! Filetype TelescopePrompt nmap q <esc>')
+end
+
 return M

@@ -1,4 +1,7 @@
 
+M = {}
+
+-- unsepcifc commands
 vim.cmd("command! Mappings enew|pu=execute('map')")
 
 vim.cmd([[
@@ -14,3 +17,11 @@ vim.cmd([[
   cnoreabbrev <silent> qqa qa!
   cnoreabbrev <silent> ee e!
 ]])
+
+
+M.telescope = function()
+  vim.cmd('command! Zoxide lua require"plugins.telescope".pickers.zoxide()')
+end
+
+return M
+

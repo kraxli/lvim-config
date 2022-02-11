@@ -24,15 +24,9 @@ local plugins = {
     end
   },
 
-    -- cwd to the project's root directory
-  {
-    "ahmedkhalf/lsp-rooter.nvim",
-    event = "BufRead",
-    config = function()
-      require("lsp-rooter").setup()
-    end,
-  },
-
+  -------------------------------------------------------
+  -- Telescope --
+  -------------------------------------------------------
   -- switch between projects
   {
     "nvim-telescope/telescope-project.nvim",
@@ -42,16 +36,24 @@ local plugins = {
     end,
   },
 
-
+  { 
+    "jvgrootveld/telescope-zoxide",
+    setup = function()
+      require('confgi.plugins.telescope-zoxide')
+    end
+  },
 
   -------------------------------------------------------
-  -- -- lsp
+  -- LSP --
   -------------------------------------------------------
-  -- {
-  --     "ray-x/lsp_signature.nvim",
-  --     config = function() require"lsp_signature".on_attach({toggle_key = '<M-a>', hi_parameter = "LspSignatureActiveParameter"}) end,
-  --     event = "BufRead", -- for setup
-  -- },
+    -- cwd to the project's root directory
+  {
+    "ahmedkhalf/lsp-rooter.nvim",
+    event = "BufRead",
+    config = function()
+      require("lsp-rooter").setup()
+    end,
+  },
 
   -- R support
   {"jalvesaq/Nvim-R"},
@@ -63,14 +65,9 @@ local plugins = {
     -- setup = function() require("config.plugins.dap") end,
   },
 
-  -- notetaking, wiki, markdonw, tex
-  {
-    'renerocksai/calendar-vim',
-  },
-
-
   -------------------------------------------------------
-  -- Markdown, Wiki, Notes, Tex, ...
+  -- Markdown, Wiki, Notes, Tex, Tasks managment,
+  -- Calendar, ...
   -------------------------------------------------------
   -- TODO:
   {
@@ -80,6 +77,13 @@ local plugins = {
   -- telescope-symbols.nvim
   -- vim-markdown-toc
   -- telescope-media-files
+
+
+  -- notetaking, wiki, markdonw, tex
+  {
+    'renerocksai/calendar-vim',
+  },
+
 
   -------------------------------------------------------
   -- colors

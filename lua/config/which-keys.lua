@@ -47,6 +47,7 @@ local mapsNormLocLeader = {
     b = {'<cmd>Telescope buffers<CR>', "Buffers"},
     f = {'<cmd>Telescope find_files<CR>', "Files"},
     g = {'<cmd>Telescope live_grep<CR>', "Live grep"},
+    G = {'<cmd>lua require"config.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep cursor word"},
     h = {'<cmd>Telescope highlights<CR>', "Highlights"},
     H = {'<cmd>Telescope search_history<CR>', "Search history"},
     j = {'<cmd>Telescope jumplist<CR>', "Jumplist"},
@@ -56,7 +57,7 @@ local mapsNormLocLeader = {
     r = {'<cmd>Telescope resume<CR>', "Resume last"},
     R = {'<cmd>Telescope pickers<CR>', "Pickers"},
     S = {'<cmd>Telescope session-lens search_session<CR>', "Search session"},
-    s = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Search current Buffer" },
+    s = {"<cmd>Telescope current_buffer_fuzzy_find<CR>", "Search current Buffer" },
     ["/"] = { '<cmd>Telescope current_buffer_fuzzy_find<CR>', "Search current buffer"},
     t = {'<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', "LSP workspace symbols"},
     u = {'<cmd>Telescope spell_suggest<CR>', "Spell suggestions"},
@@ -64,8 +65,8 @@ local mapsNormLocLeader = {
     x = {'<cmd>Telescope oldfiles<CR>', "Files old"},
     z = {'<cmd>Zoxide<CR>', "Zoxide"},
     c = { '<cmd>Telescope command_history<CR>', "Command history"}, -- ;
-    n = { '<cmd>lua require"plugins.telescope".pickers.plugin_directories()<CR>', "Directories"},
-    w = { '<cmd>lua require"plugins.telescope".pickers.notebook()<CR>', "Notebook"},
+    n = { '<cmd>lua require"config.plugins.telescope".pickers.plugin_directories()<CR>', "Directories"},
+    w = { '<cmd>lua require"config.plugins.telescope".pickers.notebook()<CR>', "Notebook"},
 
     -- Nvimtree
     a = { "<Cmd>NvimTreeToggle<CR>", "Nvimtree toggle"},
@@ -76,7 +77,8 @@ local mapsNormLocLeader = {
 local mapsXmodeLocLeader = {
 
   -- Telescope
-  g = {'<cmd>lua require"plugins.telescope".pickers.grep_string_visual()<cr>', "Grep cursor word"},
+  g = {'<cmd>lua require"config.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep cursor word"},
+  G = {'<cmd>lua require"config.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep cursor word"},
 }
 
 
@@ -94,6 +96,7 @@ else
   whk.register(mapsXmodeLocLeader, optsXmodeLocLeader)
 end
 
+
 -------------------------------------------------------
 -- LSP --
 -------------------------------------------------------
@@ -109,6 +112,7 @@ lvim.builtin.which_key.mappings['lR'] = {'<cmd>Telescope lsp_references<CR>', "L
 -- Other Lsp
 lvim.builtin.which_key.mappings['lv'] = {"<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Definition vsplit"}
 
+
 -------------------------------------------------------
 -- GIT --
 -------------------------------------------------------
@@ -118,3 +122,19 @@ lvim.builtin.which_key.mappings["gm"] = {"<cmd>Neogit<CR>", "Magit" }  -- norema
 lvim.builtin.which_key.mappings["gy"] = {"<cmd>lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>", 'Lazygit'}
 lvim.builtin.which_key.mappings["gg"] = {"<cmd>lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>", 'Lazygit'}
 
+
+-------------------------------------------------------
+-- Trouble --
+-------------------------------------------------------
+
+lvim.builtin.which_key.mappings["T"] = {
+  name = "Diagnostics",
+  t = { "<cmd>TroubleToggle<cr>", "Trouble" },
+  w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Workspace" },
+  d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Document" },
+  q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
+  l = { "<cmd>TroubleToggle loclist<cr>", "Location list" },
+  r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+  -- definition
+  -- ....
+}
