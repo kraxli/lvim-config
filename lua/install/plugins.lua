@@ -69,6 +69,17 @@ local plugins = {
   -- Markdown, Wiki, Notes, Tex, Tasks managment,
   -- Calendar, ...
   -------------------------------------------------------
+
+  {
+    'godlygeek/tabular',
+    ft = {'markdown', 'vimwiki'}
+  },  
+
+  -- {
+  --   'preservim/vim-markdown',
+  --   ft = {'markdown', 'vimwiki'}
+  -- },
+
   -- TODO:
   {
     "renerocksai/telekasten.nvim",

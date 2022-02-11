@@ -1,7 +1,7 @@
 
 sudo apt -y install npm
 
-sudo npm install -g markdownlint-cli
+sudo npm install -g markdownlint-cli  # vale replacement
 sudo pip install pyright pylsp
 sudo apt-get install xclip
 
