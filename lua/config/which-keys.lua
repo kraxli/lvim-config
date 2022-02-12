@@ -47,7 +47,7 @@ local mapsNormLocLeader = {
     b = {'<cmd>Telescope buffers<CR>', "Buffers"},
     f = {'<cmd>Telescope find_files<CR>', "Files"},
     g = {'<cmd>Telescope live_grep<CR>', "Live grep"},
-    G = {'<cmd>lua require"config.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep cursor word"},
+    G = {"<cmd>lua require('plugins.telescope').pickers.grep_string_cursor()<cr>", "Grep cursor word"},
     h = {'<cmd>Telescope highlights<CR>', "Highlights"},
     H = {'<cmd>Telescope search_history<CR>', "Search history"},
     j = {'<cmd>Telescope jumplist<CR>', "Jumplist"},
@@ -77,8 +77,8 @@ local mapsNormLocLeader = {
 local mapsXmodeLocLeader = {
 
   -- Telescope
-  g = {'<cmd>lua require"config.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep cursor word"},
-  G = {'<cmd>lua require"config.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep cursor word"},
+  g = {'<cmd>lua require"config.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep selection"},
+  G = {'<cmd>lua require"config.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep selection"},
 }
 
 
