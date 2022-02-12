@@ -19,7 +19,6 @@ lvim.builtin.presence = { active = false } -- change to true if you want discord
 lvim.builtin.orgmode = { active = true } -- change to true if you want orgmode.nvim
 lvim.builtin.dap.active = true -- change this to enable/disable debugging
 lvim.builtin.fancy_statusline = { active = true } -- enable/disable fancy statusline
-lvim.builtin.fancy_bufferline = { active = true } -- enable/disable fancy bufferline
 lvim.builtin.fancy_dashboard = { active = true } -- enable/disable fancy dashboard
 lvim.builtin.fancy_wild_menu = { active = false } -- enable/disable use wilder.nvim
 lvim.builtin.fancy_rename = { active = true } -- enable/disable custom rename
@@ -29,7 +28,7 @@ lvim.builtin.test_runner = { active = true } -- change this to enable/disable vi
 lvim.builtin.cheat = { active = true } -- enable cheat.sh integration
 lvim.builtin.sql_integration = { active = false } -- use sql integration
 lvim.builtin.neoscroll = { active = true } -- smooth scrolling
-lvim.builtin.neoclip = { active = true, enable_persistant_history = false }
+lvim.builtin.neoclip = { active = true, enable_persistent_history = false }
 lvim.builtin.nonumber_unfocus = false -- diffrentiate between focused and non focused windows
 lvim.builtin.harpoon = { active = true } -- use the harpoon plugin
 lvim.builtin.remote_dev = { active = false } -- enable/disable remote development
@@ -47,6 +46,8 @@ lvim.builtin.metals = {
 lvim.builtin.collaborative_editing = { active = false } -- enable/disable collaborative editing
 lvim.lsp.document_highlight = true
 lvim.builtin.file_browser = { active = false } -- enable/disable telescope file browser
+lvim.builtin.sniprun = { active = false } -- enable/disable sniprun
+lvim.builtin.tag_provider = "symbols-outline" -- change this to use different tag providers ( symbols-outline or vista )
 
 local user = os.getenv "USER"
 if user and (user == "dave" or user == "s6s94k") then  -- abz
@@ -90,10 +91,18 @@ end
 
 -- Language Specific
 -- =========================================
-vim.list_extend(
-  lvim.lsp.override,
-  { "rust_analyzer", "tsserver", "dockerls", "texlab", "sumneko_lua", "gopls", "jsonls", "yamlls", "r_language_server" }
-)
+vim.list_extend(lvim.lsp.override, {
+  "clangd",
+  "dockerls",
+  "gopls",
+  "pyright",
+  "r_language_server",
+  "rust_analyzer",
+  "sumneko_lua",
+  "texlab",
+  "tsserver",
+  "yamlls",
+})
 require("user.null_ls").config()
 
 -- Additional Plugins
@@ -118,6 +127,7 @@ require("install.plugins")
 
 -- load specific configurations
 -- -------------------------------------------------------
+require("config.settings")
 require("config.commands")
 require("config.commands").telescope()
 require("config.keybindings").unmapKeys()
