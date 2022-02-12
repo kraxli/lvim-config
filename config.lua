@@ -48,6 +48,7 @@ lvim.lsp.document_highlight = true
 lvim.builtin.file_browser = { active = false } -- enable/disable telescope file browser
 lvim.builtin.sniprun = { active = false } -- enable/disable sniprun
 lvim.builtin.tag_provider = "symbols-outline" -- change this to use different tag providers ( symbols-outline or vista )
+lvim.builtin.editorconfig = { active = true } -- enable/disable editorconfig
 
 local user = os.getenv "USER"
 if user and (user == "dave" or user == "s6s94k") then  -- abz
@@ -120,14 +121,13 @@ require("user.keybindings").config()
 -- =======================================================
 -- Additional settings (kraxli)
 -- =======================================================
-require("config.general")
+require("config.settings")
 
 -- load install file(s)
 require("install.plugins")
 
 -- load specific configurations
 -- -------------------------------------------------------
-require("config.settings")
 require("config.commands")
 require("config.commands").telescope()
 require("config.keybindings").unmapKeys()

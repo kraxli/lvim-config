@@ -5,55 +5,6 @@ local function clock()
   return kind.icons.clock .. os.date "%H:%M"
 end
 
-local function lsp_progress()
-  local messages = vim.lsp.util.get_progress_messages()
-  if #messages == 0 then
-    return ""
-  end
-  local status = {}
-  for _, msg in pairs(messages) do
-    table.insert(status, (msg.percentage or 0) .. "%% " .. (msg.title or ""))
-  end
-  -- local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-  -- local spinners = { " ", " ", " ", " ", " ", " ", " ", " ", " ", " " }
-  -- local spinners = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
-  local spinners = {
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-  }
-  local ms = vim.loop.hrtime() / 1000000
-  local frame = math.floor(ms / 60) % #spinners
-  return spinners[frame + 1] .. " " .. table.concat(status, " | ")
-end
-
-vim.cmd [[autocmd User LspProgressUpdate let &ro = &ro]]
-
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
   if gitsigns then
@@ -95,7 +46,7 @@ local mode = function()
   elseif mod == "i" or mod == "ic" or mod == "ix" then
     local insert_icons = {
       "  ",
-      "  ",
+      "  ",
       "  ",
     }
     return insert_icons[selector]
@@ -110,7 +61,7 @@ local mode = function()
     local command_icons = {
       "  ",
       "  ",
-      "  ",
+      "  ",
     }
 
     return command_icons[selector]
@@ -206,7 +157,7 @@ M.config = function()
   elseif _time.hour >= 9 and _time.hour < 17 then
     colors = themes.tokyonight_colors
   elseif _time.hour >= 17 and _time.hour < 21 then
-    colors = themes.doom_one_colors
+    colors = themes.catppuccin_colors
   elseif (_time.hour >= 21 and _time.hour < 24) or (_time.hour >= 0 and _time.hour < 1) then
     colors = themes.kanagawa_colors
   end
@@ -265,7 +216,7 @@ M.config = function()
         normal = { c = { fg = colors.fg, bg = colors.bg } },
         inactive = { c = { fg = colors.fg, bg = colors.bg_alt } },
       },
-      disabled_filetypes = { "dashboard", "NvimTree", "Outline", "alpha" },
+      disabled_filetypes = { "dashboard", "NvimTree", "Outline", "alpha", "vista", "vista_kind" },
     },
     sections = {
       -- these are to remove the defaults
