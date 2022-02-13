@@ -3,6 +3,7 @@ M = {}
 
 -- unsepcifc commands
 vim.cmd("command! Mappings enew|pu=execute('map')")
+vim.cmd("command! Cd2This lcd %:p:h")
 
 vim.cmd([[
   command! KeyMaps :call utils#KeyMaps()
@@ -20,7 +21,7 @@ vim.cmd([[
 
 
 M.telescope = function()
-  vim.cmd('command! Zoxide lua require"plugins.telescope".pickers.zoxide()')
+  vim.cmd("command! Zoxide lua require'plugins.telescope'.pickers.zoxide()")
 end
 
 return M

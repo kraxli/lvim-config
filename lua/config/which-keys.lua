@@ -13,12 +13,13 @@ local mapsNormNoPrefix = {
     name = "Window", -- optional group name
     g = { '<cmd>call utils#toggle_background()<CR>', "Toggle background color" }, -- create a binding with label
     b = { '<cmd>buffer#<CR>', "Buffer alternate"},
+    o = { '<cmd>only<CR>', "Only this"},
     c = { '<cmd>close<CR>', "Close"},
     d = { '<cmd>bdelete<CR>', "Buffer delete"},
-    o = { '<cmd>only<CR>', "Only this"},
     q = { '<cmd>quit<CR>', "Quit"},
     x = { '<cmd>call utils#window_empty_buffer()<CR>', "Buffer empty"},
     z = { '<cmd>call utils#zoom()<CR>', "Zoom"},
+
     -- h = { '<cmd>split<CR>', "Split horizontal"},
     -- v = { '<cmd>vsplit<CR>', "Split vertical"},
     --Split current buffer, go to previous window and previous buffer
@@ -27,6 +28,8 @@ local mapsNormNoPrefix = {
     t = { '<cmd>tabnew<CR>', "Tab new"},
     n = { '<cmd>tabnext<CR>', "Tab next"},
     p = { '<cmd>tabprev<CR>', "Tab previous"},
+
+    f = { '<cmd>lcd %:p:h<CR>'},
   },
 
    -- Telescope LSP related
