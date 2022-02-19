@@ -1,3 +1,7 @@
+# Dot files
+.lua*
+.java*
+
 # Compiled Lua sources
 luac.out
 
