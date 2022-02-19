@@ -36,12 +36,12 @@ local plugins = {
     end,
   },
 
-  { 
-    "jvgrootveld/telescope-zoxide",
-    setup = function()
-      require('confgi.plugins.telescope-zoxide')
-    end
-  },
+  -- {
+  --   "jvgrootveld/telescope-zoxide",
+  --   setup = function()
+  --     require('confgi.plugins.telescope-zoxide')
+  --   end
+  -- },
 
   -------------------------------------------------------
   -- LSP --
@@ -73,7 +73,7 @@ local plugins = {
   {
     'godlygeek/tabular',
     ft = {'markdown', 'vimwiki'}
-  },  
+  },
 
   -- {
   --   'preservim/vim-markdown',
@@ -81,9 +81,9 @@ local plugins = {
   -- },
 
   -- TODO:
-  {
-    "renerocksai/telekasten.nvim",
-  },
+  -- {
+  --   "renerocksai/telekasten.nvim",
+  -- },
 
   -- telescope-symbols.nvim
   -- vim-markdown-toc

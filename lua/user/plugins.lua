@@ -390,9 +390,9 @@ M.config = function()
       cmd = { "DiffviewOpen", "DiffviewFileHistory" },
       module = "diffview",
       keys = "<leader>gd",
-      setup = function()
-        require("which-key").register { ["<leader>gd"] = "diffview: diff HEAD" }
-      end,
+      -- setup = function()
+        -- require("which-key").register { ["<leader>gd"] = "diffview: diff HEAD" }
+      -- end,
       config = function()
         require("diffview").setup {
           enhanced_diff_hl = true,
