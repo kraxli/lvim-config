@@ -1,3 +1,18 @@
+
+# Directories
+/local/
+/undodir/
+
+# Dot files
+.lua*
+.java*
+/.vault.vim
+/.local.vimrc
+/.stignore
+/.stfolder
+/.stversions
+/.netrwhist
+
 # Compiled Lua sources
 luac.out
 

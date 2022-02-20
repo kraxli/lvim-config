@@ -14,6 +14,10 @@ M.unmapKeys = function ()
   lvim.keys.normal_mode["u"] = false
 end
 
+------------------------------------------------------------------
+-- General Keys
+------------------------------------------------------------------
+
 M.generalVimKeys = function()
 
   -- TODO: unmap q from recording use it to close telescope and buffers

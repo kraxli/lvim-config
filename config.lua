@@ -4,6 +4,7 @@ lvim.format_on_save = false
 lvim.leader = " "
 vim.g.maplocalleader = ','
 lvim.colorscheme = "one-nvim" -- "tokyonight" -- "one-nvim" -- "pablo"
+vim.o.background = 'light'
 lvim.debug = false
 vim.lsp.set_log_level "warn"
 lvim.log.level = "warn"
@@ -125,6 +126,14 @@ require("user.keybindings").config()
 -- Additional settings (kraxli)
 -- =======================================================
 require("config.general")
+-- TODO: move from vim to lua
+vim.cmd([[
+  let g:local_source_dir = fnamemodify(expand('<sfile>'), ':h').'/local/'
+  if filereadable(g:local_source_dir . 'init.vim')
+    execute 'source ' . g:local_source_dir . 'init.vim'
+  endif
+]])
+
 
 -- load install file(s)
 require("install.plugins")
@@ -134,10 +143,17 @@ require("install.plugins")
 require("config.commands")
 require("config.mappings").unmapKeys()
 require("config.mappings").generalVimKeys()
+-- require("config.commands").telescope()
+-- require("config.keybindings").unmapKeys()
+-- require("config.keybindings").generalVimKeys()
+-- require("config.keybindings").telescope()
+-- require("config.keybindings").bulletsVim()
+-- vim.cmd('au! FileType markdown,vimwiki,text lua require("config.keybindings").bulletsVim()')
 vim.cmd([[au! BufEnter * lua require("config.which-keys")]])
 
 require("config.plugins.nvimtree")
 require("config.plugins.telescope")
+require("config.plugins.devicons")
 require("config.plugins.lsp")
 require("config.plugins.dap")
 require("config.plugins.trouble")

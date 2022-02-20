@@ -3,6 +3,7 @@
 -------------------------------------------------------
 vim.g.maplocalleader = ','
 vim.wo.relativenumber = false
+-- vim.o.cmdheight=2
 
 -- timeing:
 -------------------------------------------------------

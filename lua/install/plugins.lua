@@ -31,6 +31,9 @@ local plugins = {
     end,
   },
 
+  -- {
+  --   "lambdalisue/nerdfont.vim",  -- lazy by nature
+  -- },
   -------------------------------------------------------
   -- GIT --
   -------------------------------------------------------
@@ -83,6 +86,17 @@ local plugins = {
 
   -- R support
   {"jalvesaq/Nvim-R"},
+  -------------------------------------------------------
+  -- LSP --
+  -------------------------------------------------------
+    -- cwd to the project's root directory
+  {
+    "ahmedkhalf/lsp-rooter.nvim",
+    event = "BufRead",
+    config = function()
+      require("lsp-rooter").setup()
+    end,
+  },
 
   -- lua in Neovim debug support
   {
@@ -104,8 +118,16 @@ local plugins = {
   },
 
   {
+    'preservim/vim-markdown',
+    ft = {'markdown', 'vimwiki'},
+    config = function()
+      require("config.plugins.vim-markdown")
+    end,
+  },
+
+  {
     'dkarter/bullets.vim',
-    ft = {'markdown', 'vimwiki', 'text'},
+    ft = {'markdown', 'vimwiki'},
     cmd = {'ToggleCheckbox'},
     setup = function()
       require("config.plugins.bullets").setup()
@@ -126,12 +148,12 @@ local plugins = {
     end,
   },
 
-
-
   -- telescope-symbols.nvim
   -- vim-markdown-toc
   -- telescope-media-files
 
+
+  -------------------------------------------------------
   -- colors
 	{
     "Th3Whit3Wolf/one-nvim",

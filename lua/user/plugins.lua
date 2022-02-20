@@ -12,6 +12,7 @@ M.config = function()
       config = function()
         require("user.theme").rose_pine()
         vim.cmd [[colorscheme rose-pine]]
+        vim.o.background = 'light'
       end,
       cond = function()
         local _time = os.date "*t"
@@ -23,6 +24,7 @@ M.config = function()
       config = function()
         require("user.theme").tokyonight()
         vim.cmd [[colorscheme tokyonight]]
+        vim.o.background = 'light'
       end,
       cond = function()
         local _time = os.date "*t"

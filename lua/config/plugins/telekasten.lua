@@ -8,7 +8,6 @@
 local home = vim.fn.expand("~/Dropbox/PKD")
 -- local home = vim.fn.expand(dirPkd)
 
-
 require('telekasten').setup({
     home = home,
 
@@ -134,6 +133,4 @@ vim.api.nvim_set_keymap('i', '<leader>zt', "<ESC>:lua require('telekasten').togg
 vim.api.nvim_set_keymap('i', '<leader>#', "<cmd>lua require('telekasten').show_tags({i = true})<cr>", keyOpts)
 
 vim.api.nvim_set_keymap('i', '<Leader><Space>', ':set hlsearch!<CR>', keyOpts)
-
--- commands for telekasten
 

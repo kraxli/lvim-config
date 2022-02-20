@@ -202,16 +202,9 @@ M.config = function()
     { name = "DiagnosticSignInfo", text = kind.icons.info },
     { name = "DiagnosticSignHint", text = kind.icons.hint },
   }
-  lvim.lsp.diagnostics.float.source = "if_many"
-  lvim.lsp.diagnostics.float.format = function(d)
-    local t = vim.deepcopy(d)
-    local code = d.code or (d.user_data and d.user_data.lsp.code)
-    for _, table in pairs(M.codes) do
-      if vim.tbl_contains(table, code) then
-        return table.message
-      end
-    end
-    return t.message
+  local ok, _ = pcall(require, "vim.diagnostic")
+  if ok then
+    vim.diagnostic.config { virtual_text = false }
   end
 
   -- Lualine
