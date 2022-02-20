@@ -122,7 +122,7 @@ local function set_bufferline_keymaps()
 end
 
 local function set_harpoon_keymaps()
-  lvim.builtin.which_key.mappings["x"] = {"<cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>", "Harpoon Menu"}
+  -- lvim.builtin.which_key.mappings["x"] = {"<cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>", "Harpoon Menu"}
   lvim.builtin.which_key.mappings["X"] = {"<cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>", "Harpoon Menu"}
   -- lvim.keys.normal_mode["<C-Space>"] = "<cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>"
   lvim.keys.normal_mode["tu"] = "<cmd>lua require('harpoon.term').gotoTerminal(1)<CR>"

@@ -12,3 +12,4 @@
 - [ ] copilot (tpope): https://github.com/github/copilot.vim
 - [ ] surround plugin
 - [ ] Telekasten
+- [ ] unmap <leader>x for ToggleCheckbox in plugin bullets.vim
