@@ -12,10 +12,11 @@ M.config = function()
       config = function()
         require("user.theme").rose_pine()
         vim.cmd [[colorscheme rose-pine]]
+        vim.o.background = 'light'
       end,
       cond = function()
         local _time = os.date "*t"
-        return (_time.hour >= 1 and _time.hour < 9)
+        return (_time.hour >= 17 and _time.hour < 24) or (_time.hour >= 0 and _time.hour < 9)
       end,
     },
     {
@@ -23,24 +24,25 @@ M.config = function()
       config = function()
         require("user.theme").tokyonight()
         vim.cmd [[colorscheme tokyonight]]
+        vim.o.background = 'light'
       end,
       cond = function()
         local _time = os.date "*t"
-        return _time.hour >= 9 and _time.hour < 17
+        return (_time.hour >= 9 and _time.hour < 17)
       end,
     },
-    {
-      "catppuccin/nvim",
-      as = "catppuccin",
-      config = function()
-        require("user.theme").catppuccin()
-        vim.cmd [[colorscheme catppuccin]]
-      end,
-      cond = function()
-        local _time = os.date "*t"
-        return (_time.hour >= 17 and _time.hour < 21)
-      end,
-    },
+    -- {
+    --   "catppuccin/nvim",
+    --   as = "catppuccin",
+    --   config = function()
+    --     require("user.theme").catppuccin()
+    --     vim.cmd [[colorscheme catppuccin]]
+    --   end,
+    --   cond = function()
+    --     local _time = os.date "*t"
+    --     return (_time.hour >= 17 and _time.hour < 21)
+    --   end,
+    -- },
     -- {
     --   "rebelot/kanagawa.nvim",
     --   config = function()

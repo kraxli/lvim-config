@@ -3,7 +3,7 @@
 lvim.format_on_save = false
 lvim.leader = " "
 vim.g.maplocalleader = ','
--- lvim.colorscheme = "tokyonight" -- "one-nvim" -- "pablo"
+-- lvim.colorscheme = "one-nvim"
 lvim.debug = false
 vim.lsp.set_log_level "warn"
 lvim.log.level = "warn"

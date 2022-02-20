@@ -114,28 +114,11 @@ local plugins = {
   -------------------------------------------------------
   -- colors
   -------------------------------------------------------
+
+  -- lazy by nature
 	{
     "Th3Whit3Wolf/one-nvim",
-    config = function()
-      -- require("user.theme").kanagawa()
-      vim.cmd [[colorscheme one-nvim]]
-    end,
-    cond = function()
-      local _time = os.date "*t"
-      return (_time.hour >= 22 and _time.hour < 24) or (_time.hour >= 0 and _time.hour < 1)
-    end,
-
-
   },
-
-    -- cond = function()
-    --   -- require("user.theme").doom()
-    --   vim.cmd [[colorscheme one-nvim]]
-    -- end,
-    -- cond = function()
-    --   local _time = os.date "*t"
-    --   return (_time.hour >= 17 and _time.hour < 21)
-    -- end,
 
    -- {"Th3Whit3Wolf/space-nvim"},
    -- {"Th3Whit3Wolf/onebuddy"},
@@ -143,6 +126,10 @@ local plugins = {
    -- {"rafamadriz/neon"},
 }
 
+
+  -------------------------------------------------------
+  -- append plugins-table to lvim.plugins
+  -------------------------------------------------------
 
 -- table.merge(lvim.plugins, plugins)
 -- lvim.plugins = table.combine(lvim.plugins, plugins)
