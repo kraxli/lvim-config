@@ -323,6 +323,7 @@ M.config = function()
       "goolord/alpha-nvim",
       config = function()
         require("user.dashboard").config()
+        vim.cmd("au! FileType alpha setl nospell")
       end,
       disable = not lvim.builtin.fancy_dashboard.active,
     },

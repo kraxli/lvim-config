@@ -104,14 +104,18 @@ end
 -- show code actions in a fancy floating window
 function M.code_actions()
   local opts = {
+    winblend = 15,
     layout_config = {
       prompt_position = "top",
       width = 80,
       height = 12,
     },
-    winblend = 0,
+    borderchars = {
+      prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+      results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+      preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    },
     border = {},
-    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     previewer = false,
     shorten_path = false,
   }
@@ -173,6 +177,7 @@ function M.find_updir()
 
   builtin.find_files(opts)
 end
+
 
 function M.installed_plugins()
   builtin.find_files {

@@ -1,0 +1,3 @@
+
+setl nospell
+

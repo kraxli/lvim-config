@@ -12,7 +12,9 @@ function! markdown#MkdFoldSimple(lnum)
   " let nxt_syntax_group = synIDattr(synID(a:lnum + 1, 1, 1), 'name')
 
   let pounds = <sid>headerLevel(a:lnum)  " strlen(matchstr(getline(a:lnum), '^#\+'))
-  if (pounds && cur_syntax_group !=? 'mkdCode')
+  let isCodeBlock = (cur_syntax_group ==? 'mkdCode' || cur_syntax_group ==? 'markdownCode')
+
+  if (pounds && !isCodeBlock)
     return '>' . pounds  " start a fold level
   endif
   if getline(a:lnum) =~? '\v^\s*$'

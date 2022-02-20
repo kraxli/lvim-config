@@ -4,7 +4,7 @@ local plugins = {
   -- General
   -------------------------------------------------------
   {
-    {'chentau/marks.nvim'},
+    'chentau/marks.nvim',
     requires = "gitsigns.nvim",
     event = "FileType",
     config = function ()
@@ -12,6 +12,9 @@ local plugins = {
     end
   },
 
+  -- {
+  --   "lambdalisue/nerdfont.vim",  -- lazy by nature
+  -- },
   -------------------------------------------------------
   -- GIT --
   -------------------------------------------------------
@@ -55,9 +58,6 @@ local plugins = {
     end,
   },
 
-  -- R support
-  {"jalvesaq/Nvim-R"},
-
   -- lua in Neovim debug support
   {
     "jbyuki/one-small-step-for-vimkind",
@@ -72,23 +72,38 @@ local plugins = {
 
   {
     'godlygeek/tabular',
-    ft = {'markdown', 'vimwiki'}
+    ft = {'markdown', 'vimwiki'},
   },
 
-  -- {
-  --   'preservim/vim-markdown',
-  --   ft = {'markdown', 'vimwiki'}
-  -- },
+  {
+    'preservim/vim-markdown',
+    ft = {'markdown', 'vimwiki'},
+    config = function()
+      require("config.plugins.vim-markdown")
+    end,
+    },
+
+  {
+    'dkarter/bullets.vim',
+    ft = {'markdown', 'vimwiki'},
+    cmd = {'ToggleCheckbox'},
+    setup = function()
+      require("config.plugins.bullets").setup()
+    end,
+  },
 
   -- TODO:
-  -- {
-  --   "renerocksai/telekasten.nvim",
-  -- },
+  {
+    "renerocksai/telekasten.nvim",
+    cmd = {'Telekasten'},
+    config = function()
+      require("config/plugins/telekasten")
+    end,
+  },
 
   -- telescope-symbols.nvim
   -- vim-markdown-toc
   -- telescope-media-files
-
 
   -- notetaking, wiki, markdonw, tex
   {

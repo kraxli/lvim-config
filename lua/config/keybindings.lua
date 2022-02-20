@@ -10,6 +10,10 @@ M.unmapKeys = function ()
   lvim.keys.normal_mode["q"] = false
 end
 
+------------------------------------------------------------------
+-- General Keys
+------------------------------------------------------------------
+
 M.generalVimKeys = function()
 
   -- TODO: unmap q from recording use it to close telescope and buffers
@@ -92,9 +96,45 @@ M.generalVimKeys = function()
   -- vim.api.nvim_set_keymap('n', '<c-c>', "<cmd>BufferClose!<CR>", {})
 end
 
+------------------------------------------------------------------
+-- Telescope
+------------------------------------------------------------------
+
 M.telescope = function()
   -- close telescope with q
   vim.cmd('au! Filetype TelescopePrompt nmap q <esc>')
 end
+
+------------------------------------------------------------------
+-- bullets.vim
+------------------------------------------------------------------
+
+M.bulletsVim = function()
+  -- mappings:
+  lvim.keys.normal_mode["<C-Space>"] = false
+  lvim.keys.normal_mode["<C-Space>"] = "<cmd>ToggleCheckbox<CR>"
+
+    -- " automatic bullets
+    -- call s:add_local_mapping('inoremap', '<cr>', '<C-]><C-R>=<SID>insert_new_bullet()<cr>')
+    -- call s:add_local_mapping('inoremap', '<C-cr>', '<cr>')
+
+    -- call s:add_local_mapping('nnoremap', 'o', ':call <SID>insert_new_bullet()<cr>')
+
+    -- " Renumber bullet list
+    -- call s:add_local_mapping('vnoremap', 'gN', ':RenumberSelection<cr>')
+    -- call s:add_local_mapping('nnoremap', 'gN', ':RenumberList<cr>')
+
+    -- " Toggle checkbox
+    -- call s:add_local_mapping('nnoremap', '<leader>x', ':ToggleCheckbox<cr>')
+
+    -- " Promote and Demote outline level
+    -- call s:add_local_mapping('inoremap', '<C-t>', '<C-o>:BulletDemote<cr>')
+    -- call s:add_local_mapping('nnoremap', '>>', ':BulletDemote<cr>')
+    -- call s:add_local_mapping('inoremap', '<C-d>', '<C-o>:BulletPromote<cr>')
+    -- call s:add_local_mapping('nnoremap', '<<', ':BulletPromote<cr>')
+    -- call s:add_local_mapping('vnoremap', '>', ':BulletDemoteVisual<cr>')
+    -- call s:add_local_mapping('vnoremap', '<', ':BulletPromoteVisual<cr>')
+end
+
 
 return M

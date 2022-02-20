@@ -21,3 +21,15 @@ local tree_cb = require'nvim-tree.config'.nvim_tree_callback
       { key = "gtg", cb = "<cmd>lua require'lvim.core.nvimtree'.start_telescope('live_grep')<cr>" },
 }
 
+
+vim.g.nvim_tree_icons = {
+    default = "",
+    symlink = "",
+    folder = {
+        default = "",
+        open = "ﱮ",
+        empty_open = "ﱮ",
+        empty = "",
+        symlink = "",
+    },
+}

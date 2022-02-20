@@ -50,6 +50,7 @@ local mapsNormLocLeader = {
     b = {'<cmd>Telescope buffers<CR>', "Buffers"},
     f = {'<cmd>Telescope find_files<CR>', "Files"},
     g = {'<cmd>Telescope live_grep<CR>', "Live grep"},
+    -- TODO: not working
     G = {"<cmd>lua require('plugins.telescope').pickers.grep_string_cursor()<cr>", "Grep cursor word"},
     h = {'<cmd>Telescope highlights<CR>', "Highlights"},
     H = {'<cmd>Telescope search_history<CR>', "Search history"},
