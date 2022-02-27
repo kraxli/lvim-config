@@ -160,6 +160,10 @@ M.config = function()
 
   -- LSP
   -- =========================================
+  lvim.lsp.buffer_mappings.normal_mode["K"] = {
+    "<cmd>lua require('user.builtin').show_documentation()<CR>",
+    "Show Documentation",
+  }
   lvim.lsp.diagnostics.float.border = "rounded"
   lvim.lsp.diagnostics.float.focusable = false
   lvim.lsp.float.focusable = true
@@ -280,8 +284,18 @@ M.config = function()
   -- =========================================
   -- lvim.builtin.telescope.defaults.path_display = { "smart", "absolute", "truncate" }
   lvim.builtin.telescope.defaults.path_display = { shorten = 10 }
-  lvim.builtin.telescope.defaults.winblend = 3
-  lvim.builtin.telescope.defaults.selection_caret = "  "
+  if lvim.builtin.fancy_telescope.active then
+    lvim.builtin.telescope.defaults.prompt_prefix = "  "
+    lvim.builtin.telescope.defaults.borderchars = {
+      prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      results = { "─", "▐", "─", "│", "╭", "▐", "▐", "╰" },
+      -- results = {' ', '▐', '▄', '▌', '▌', '▐', '▟', '▙' };
+      preview = { " ", "│", " ", "▌", "▌", "╮", "╯", "▌" },
+    }
+    lvim.builtin.telescope.defaults.selection_caret = "  "
+  else
+    lvim.builtin.telescope.defaults.winblend = 15
+  end
   lvim.builtin.telescope.defaults.cache_picker = { num_pickers = 3 }
   lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
   lvim.builtin.telescope.defaults.file_ignore_patterns = {
@@ -336,8 +350,6 @@ M.config = function()
     "%.flac",
     "%.tar.gz",
   }
-  lvim.builtin.telescope.defaults.color_devicons = true
-  lvim.builtin.telescope.defaults.use_less = true
   local user_telescope = require "user.telescope"
   lvim.builtin.telescope.defaults.layout_config = user_telescope.layout_config()
   local actions = require "telescope.actions"
@@ -610,6 +622,85 @@ function M.cpmenu()
       { "toggle breakpoint", ":lua require'dap'.toggle_breakpoint()" },
     },
   }
+end
+
+-- credit: https://github.com/max397574/NeovimConfig/blob/master/lua/configs/lsp/init.lua
+M.codes = {
+  no_matching_function = {
+    message = " Can't find a matching function",
+    "redundant-parameter",
+    "ovl_no_viable_function_in_call",
+  },
+  different_requires = {
+    message = " Buddy you've imported this before, with the same name",
+    "different-requires",
+  },
+  empty_block = {
+    message = " That shouldn't be empty here",
+    "empty-block",
+  },
+  missing_symbol = {
+    message = " Here should be a symbol",
+    "miss-symbol",
+  },
+  expected_semi_colon = {
+    message = " Remember the `;` or `,`",
+    "expected_semi_declaration",
+    "miss-sep-in-table",
+    "invalid_token_after_toplevel_declarator",
+  },
+  redefinition = {
+    message = " That variable was defined before",
+    "redefinition",
+    "redefined-local",
+  },
+  no_matching_variable = {
+    message = " Can't find that variable",
+    "undefined-global",
+    "reportUndefinedVariable",
+  },
+  trailing_whitespace = {
+    message = " Remove trailing whitespace",
+    "trailing-whitespace",
+    "trailing-space",
+  },
+  unused_variable = {
+    message = " Don't define variables you don't use",
+    "unused-local",
+  },
+  unused_function = {
+    message = " Don't define functions you don't use",
+    "unused-function",
+  },
+  useless_symbols = {
+    message = " Remove that useless symbols",
+    "unknown-symbol",
+  },
+  wrong_type = {
+    message = " Try to use the correct types",
+    "init_conversion_failed",
+  },
+  undeclared_variable = {
+    message = " Have you delcared that variable somewhere?",
+    "undeclared_var_use",
+  },
+  lowercase_global = {
+    message = " Should that be a global? (if so make it uppercase)",
+    "lowercase-global",
+  },
+}
+
+M.show_documentation = function()
+  local filetype = vim.bo.filetype
+  if vim.tbl_contains({ "vim", "help" }, filetype) then
+    vim.cmd("h " .. vim.fn.expand "<cword>")
+  elseif vim.fn.expand "%:t" == "Cargo.toml" then
+    require("crates").show_popup()
+  elseif vim.tbl_contains({ "man" }, filetype) then
+    vim.cmd("Man " .. vim.fn.expand "<cword>")
+  else
+    vim.lsp.buf.hover()
+  end
 end
 
 return M

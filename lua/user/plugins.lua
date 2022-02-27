@@ -115,9 +115,7 @@ M.config = function()
       disable = lvim.builtin.motion_provider ~= "hop",
     },
     {
-      -- NOTE: temporary workaround for neovim head, change back to simrat39 once merged
-      "zeertzjq/symbols-outline.nvim",
-      branch = "patch-1",
+      "simrat39/symbols-outline.nvim",
       setup = function()
         require("user.symbols_outline").config()
       end,
@@ -558,6 +556,14 @@ M.config = function()
       "editorconfig/editorconfig-vim",
       event = "BufRead",
       disable = not lvim.builtin.editorconfig.active,
+    },
+    {
+      "saecki/crates.nvim",
+      event = { "BufRead Cargo.toml" },
+      requires = { { "nvim-lua/plenary.nvim" } },
+      config = function()
+        require("user.crates").config()
+      end,
     },
   }
 end

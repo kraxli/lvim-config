@@ -101,6 +101,7 @@ vim.list_extend(lvim.lsp.override, {
   "r_language_server",
   "rust_analyzer",
   "sumneko_lua",
+  "taplo",
   "texlab",
   "tsserver",
   "yamlls",
