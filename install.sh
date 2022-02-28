@@ -14,6 +14,11 @@ sudo add-apt-repository ppa:lazygit-team/release
 sudo apt-get update
 sudo apt-get install lazygit
 
+# -- Zoxide --
+
+# sudo apt install zoxide  # Ubuntu >21.04
+curl -sS https://webinstall.dev/zoxide | bash
+
 # =======================================================
 
 # brew install luarocks
