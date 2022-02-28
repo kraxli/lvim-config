@@ -183,7 +183,6 @@ lvim.builtin.which_key.mappings["T"] = {
     I = { "<cmd>lua require('telekasten').insert_img_link({ i=true })<CR>", "Insert image link" },
     k = { "<cmd>Telekasten<CR>", "Telekasten" },
     l = { "<cmd>lua require('telekasten').insert_link({ i=true })<CR>", "Insert link"},
-    ["["] = { "<cmd>lua require('telekasten').insert_link({ i=true })<CR>", "Insert link"},
     m = { "<cmd>lua require('telekasten').browse_media()<CR>", "Browse media" },
     n = { "<cmd>lua require('telekasten').new_note()<CR>", "New note" },
     N = { "<cmd>lua require('telekasten').new_templated_note()<CR>", "New template note" },
@@ -195,5 +194,6 @@ lvim.builtin.which_key.mappings["T"] = {
     y = { "<cmd>lua require('telekasten').yank_notelink()<CR>", "Yank note link" },
     z = { "<cmd>lua require('telekasten').follow_link()<CR>", "Follow lin" },
     ["#"] = { "<cmd>lua require('telekasten').show_tags()<CR>", "Show tags" },
+    ["["] = { "<cmd>lua require('telekasten').insert_link({ i=true })<CR>", "Insert link"},
   }
 

@@ -211,7 +211,7 @@ M.config = function()
   end
   lvim.keys.normal_mode["<esc><esc>"] = "<cmd>nohlsearch<cr>"
   lvim.keys.normal_mode["Y"] = "y$"
-  lvim.keys.normal_mode["gv"] = "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>"
+  lvim.keys.normal_mode["sv"] = "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>"
   if lvim.builtin.harpoon.active then
     set_harpoon_keymaps()
   end
@@ -343,12 +343,12 @@ M.config = function()
     t = { "<cmd>TodoLocList <cr>", "Todo" },
     w = { "<cmd>Trouble workspace_diagnostics<cr>", "Diagnosticss" },
   }
-  lvim.builtin.which_key.mappings["z"] = { "<cmd>ZenMode<cr>", " Zen" }
+  lvim.builtin.which_key.mappings["Z"] = { "<cmd>ZenMode<cr>", " Zen" }
   lvim.builtin.which_key.mappings["w"] = { "<cmd>w!<CR>", " Save" }
   lvim.builtin.which_key.vmappings["g"] = {
     name = " Git",
     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-  }
+  } -- TODO: is this ok?
 
   -- My wezterm is weird
   -- =========================================

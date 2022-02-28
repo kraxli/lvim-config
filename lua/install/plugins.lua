@@ -1,6 +1,8 @@
 local plugins = {
 
-  -- General
+  ------------------------------------------------------------------
+  -- General Keys
+  ------------------------------------------------------------------
   {
     "romainl/vim-cool", -- disables search highlighting when you are done
     event = { "CursorMoved", "InsertEnter" },
@@ -21,12 +23,12 @@ local plugins = {
   -- alternative: machakann/vim-sandwich
   {
     'appelgriebsch/surround.nvim',
+    disable = 1,
     keys = {'s'},
     event = "BufReadPost",
     config = function()
       require('config.plugins.surround-nvim')
     end,
-    disable = 1,
   },
 
   -------------------------------------------------------
@@ -49,6 +51,18 @@ local plugins = {
     end,
   },
 
+  {
+    'chentau/marks.nvim',
+    requires = "gitsigns.nvim",
+    event = "FileType",
+    config = function ()
+      require('config.plugins.marks')
+    end
+  },
+
+  ------------------------------------------------------------------
+  -- Telescope
+  ------------------------------------------------------------------
   -- switch between projects
   {
     "nvim-telescope/telescope-project.nvim",
@@ -58,9 +72,9 @@ local plugins = {
     end,
   },
 
-
-
-  -- -- lsp
+  ------------------------------------------------------------------
+  -- LSP / DAP
+  ------------------------------------------------------------------
   -- {
   --     "ray-x/lsp_signature.nvim",
   --     config = function() require"lsp_signature".on_attach({toggle_key = '<M-a>', hi_parameter = "LspSignatureActiveParameter"}) end,
@@ -77,22 +91,33 @@ local plugins = {
     -- setup = function() require("config.plugins.dap") end,
   },
 
+  ------------------------------------------------------------------
   -- notetaking, wiki, markdonw, tex
+  ------------------------------------------------------------------
   {
     'renerocksai/calendar-vim',
   },
 
+  {
+    'godlygeek/tabular',
+    ft = {'markdown', 'vimwiki'},
+  },
 
-
-
+  {
+    'dkarter/bullets.vim',
+    ft = {'markdown', 'vimwiki', 'text'},
+    cmd = {'ToggleCheckbox'},
+    setup = function()
+      require("config.plugins.bullets").setup()
+    end,
+  },
 
   -- TODO:
   {
     "renerocksai/telekasten.nvim",
-    -- ft = {'markdown', 'vimwiki', 'text'},
-    -- cmd = {'Telekasten', 'Tk'},
-    -- keys = {'<leader>z'},
-    event = "BufWinEnter",
+    ft = {'markdown', 'vimwiki', 'text'},
+    cmd = {'Telekasten', 'Tk'},
+    keys = {'<leader>z'},
     setup = function ()
       vim.cmd([[
         command! Tk :Telekasten
@@ -101,6 +126,8 @@ local plugins = {
     end,
   },
 
+
+
   -- telescope-symbols.nvim
   -- vim-markdown-toc
   -- telescope-media-files
@@ -108,16 +135,13 @@ local plugins = {
   -- colors
 	{
     "Th3Whit3Wolf/one-nvim",
-    config = function()
-      -- require("user.theme").kanagawa()
-      vim.cmd [[colorscheme one-nvim]]
-    end,
-    cond = function()
-      local _time = os.date "*t"
-      return (_time.hour >= 22 and _time.hour < 24) or (_time.hour >= 0 and _time.hour < 1)
-    end,
-
-
+    -- config = function()
+    --   vim.cmd [[colorscheme one-nvim]]
+    -- end,
+    -- cond = function()
+    --   local _time = os.date "*t"
+    --   return (_time.hour >= 22 and _time.hour < 24) or (_time.hour >= 0 and _time.hour < 1)
+    -- end,
   },
 
     -- cond = function()

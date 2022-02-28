@@ -3,7 +3,7 @@
 lvim.format_on_save = false
 lvim.leader = " "
 vim.g.maplocalleader = ','
--- lvim.colorscheme = "tokyonight" -- "one-nvim" -- "pablo"
+lvim.colorscheme = "one-nvim" -- "tokyonight" -- "one-nvim" -- "pablo"
 lvim.debug = false
 vim.lsp.set_log_level "warn"
 lvim.log.level = "warn"
@@ -48,7 +48,7 @@ lvim.builtin.file_browser = { active = false } -- enable/disable telescope file 
 lvim.builtin.sniprun = { active = false } -- enable/disable sniprun
 lvim.builtin.tag_provider = "symbols-outline" -- change this to use different tag providers ( symbols-outline or vista )
 lvim.builtin.editorconfig = { active = true } -- enable/disable editorconfig
-lvim.builtin.fancy_telescope = { active = true } -- telescope to the moon
+lvim.builtin.fancy_telescope = { active = false } -- telescope to the moon
 lvim.builtin.global_statusline = false -- set true to use global statusline
 
 local user = os.getenv "USER"

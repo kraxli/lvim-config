@@ -15,7 +15,7 @@ M.config = function()
       end,
       cond = function()
         local _time = os.date "*t"
-        return (_time.hour >= 1 and _time.hour < 9)
+        return (_time.hour >= 1 and _time.hour < 7)
       end,
     },
     {
@@ -26,21 +26,21 @@ M.config = function()
       end,
       cond = function()
         local _time = os.date "*t"
-        return _time.hour >= 9 and _time.hour < 17
+        return _time.hour >= 7 and _time.hour < 17
       end,
     },
-    {
-      "catppuccin/nvim",
-      as = "catppuccin",
-      config = function()
-        require("user.theme").catppuccin()
-        vim.cmd [[colorscheme catppuccin]]
-      end,
-      cond = function()
-        local _time = os.date "*t"
-        return (_time.hour >= 17 and _time.hour < 21)
-      end,
-    },
+    -- {
+    --   "catppuccin/nvim",
+    --   as = "catppuccin",
+    --   config = function()
+    --     require("user.theme").catppuccin()
+    --     vim.cmd [[colorscheme catppuccin]]
+    --   end,
+    --   cond = function()
+    --     local _time = os.date "*t"
+    --     return (_time.hour >= 17 and _time.hour < 21)
+    --   end,
+    -- },
     -- {
     --   "rebelot/kanagawa.nvim",
     --   config = function()
