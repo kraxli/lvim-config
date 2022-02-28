@@ -123,14 +123,15 @@ require("user.keybindings").config()
 -- =======================================================
 -- Additional settings (kraxli)
 -- =======================================================
--- TODO: move from vim to lua
-vim.cmd([[
-  let g:local_source_dir = fnamemodify(expand('<sfile>'), ':h').'/local/'
-  if filereadable(g:local_source_dir . 'init.vim')
-    execute 'source ' . g:local_source_dir . 'init.vim'
-  endif
-]])
 
+-- vim.cmd([[
+--   let g:local_source_dir = fnamemodify(expand('<sfile>'), ':h').'/local/'
+--   if filereadable(g:local_source_dir . 'init.vim')
+--     execute 'source ' . g:local_source_dir . 'init.vim'
+--   endif
+-- ]])
+
+require("local/settings")
 require("config.settings")
 
 -- load install file(s)
