@@ -133,7 +133,5 @@ vim.api.nvim_set_keymap('i', 'llii', "<ESC>:lua require('telekasten').insert_lin
 vim.api.nvim_set_keymap('i', '<leader>zt', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
 vim.api.nvim_set_keymap('i', '<leader>#', "<cmd>lua require('telekasten').show_tags({i = true})<cr>", keyOpts)
 
-vim.api.nvim_set_keymap('i', '<Leader><Space>', ':set hlsearch!<CR>', keyOpts)
-
 -- commands for telekasten
 
