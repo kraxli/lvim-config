@@ -322,7 +322,7 @@ M.config = function()
     t = { "<cmd>TodoLocList <cr>", "Todo" },
     w = { "<cmd>Trouble workspace_diagnostics<cr>", "Diagnosticss" },
   }
-  lvim.builtin.which_key.mappings["z"] = { "<cmd>ZenMode<cr>", "Zen" }
+  lvim.builtin.which_key.mappings["Z"] = { "<cmd>ZenMode<cr>", "Zen" }
 
   -- My wezterm is weird
   -- =========================================

@@ -4,7 +4,9 @@
 -- - try WSL2 on Windows and pretend you're on Linux
 -- - if you **must** use Windows, use "/Users/myname/zettelkasten" instead of "~/zettelkasten"
 -- - NEVER use "C:\Users\myname" style paths
+
 local home = vim.fn.expand("~/Dropbox/PKD")
+-- local home = vim.fn.expand(dirPkd)
 
 
 require('telekasten').setup({
@@ -114,3 +116,24 @@ require('telekasten').setup({
     -- should all links be updated when a file is renamed
     rename_update_links = true,
 })
+
+
+-- key mappings telekasten
+ -- we could define [[ in **insert mode** to call insert link
+ -- alternatively: leader [
+
+-- vim.cmd([[
+--  inoremap llii <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
+--  inoremap <leader>zt <ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>
+--  inoremap <leader># <cmd>lua require('telekasten').show_tags({i = true})<cr>
+-- ]])
+
+local keyOpts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap('i', 'llii', "<ESC>:lua require('telekasten').insert_link({ i=true })<CR>", keyOpts)
+vim.api.nvim_set_keymap('i', '<leader>zt', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
+vim.api.nvim_set_keymap('i', '<leader>#', "<cmd>lua require('telekasten').show_tags({i = true})<cr>", keyOpts)
+
+vim.api.nvim_set_keymap('i', '<Leader><Space>', ':set hlsearch!<CR>', keyOpts)
+
+-- commands for telekasten
+

@@ -133,7 +133,7 @@ lvim.builtin.which_key.mappings["gy"] = {"<cmd>lua require('lvim.core.terminal')
 lvim.builtin.which_key.mappings["gg"] = {"<cmd>lua require('lvim.core.terminal')._exec_toggle({cmd = 'lazygit', count = 1, direction = 'float'})<CR>", 'Lazygit'}
 
 
--------------------------------------------------------
+--------------------------------------------------
 -- Trouble --
 -------------------------------------------------------
 
@@ -148,3 +148,35 @@ lvim.builtin.which_key.mappings["T"] = {
   -- definition
   -- ....
 }
+
+
+--------------------------------------------------
+-- Telekasten --
+-------------------------------------------------------
+
+  lvim.builtin.which_key.mappings["z"] = {
+    name = "Telekasten",
+    b = { "<cmd>lua require('telekasten').show_backlinks()<CR>", "Show backlinks" },
+    c = { "<cmd>lua require('telekasten').show_calendar()<CR>", "Show calendar" },
+    C = { "<cmd>CalendarT<CR>", "Calendar" },
+    d = { "<cmd>lua require('telekasten').find_daily_notes()<CR>", "Find daily notes" },
+    f = { "<cmd>lua require('telekasten').find_notes()<CR>", "Find notes" },
+    F = { "<cmd>lua require('telekasten').find_friends()<CR>", "Find friends" },
+    g = { "<cmd>lua require('telekasten').search_notes()<CR>", "Search notes" },
+    i = { "<cmd>lua require('telekasten').paste_img_and_link()<CR>", "Paste img / link" },
+    I = { "<cmd>lua require('telekasten').insert_img_link({ i=true })<CR>", "Insert image link" },
+    ["["] = { "<cmd>lua require('telekasten').insert_link({ i=true })<CR>", "Insert link"},
+    k = { "<cmd>Telekasten<CR>", "Telekasten" },
+    m = { "<cmd>lua require('telekasten').browse_media()<CR>", "Browse media" },
+    n = { "<cmd>lua require('telekasten').new_note()<CR>", "New note" },
+    N = { "<cmd>lua require('telekasten').new_templated_note()<CR>", "New template note" },
+    p = { "<cmd>lua require('telekasten').preview_img()<CR>", "Preview img" },
+    t = { "<cmd>lua require('telekasten').toggle_todo()<CR>", "Toggle todo" },
+    T = { "<cmd>lua require('telekasten').goto_today()<CR>", "Goto today" },
+    w = { "<cmd>lua require('telekasten').find_weekly_notes()<CR>", "Find weekly notes" },
+    W = { "<cmd>lua require('telekasten').goto_thisweek()<CR>", "Goto this week" },
+    y = { "<cmd>lua require('telekasten').yank_notelink()<CR>", "Yank note link" },
+    z = { "<cmd>lua require('telekasten').follow_link()<CR>", "Follow lin" },
+    ["#"] = { "<cmd>lua require('telekasten').show_tags()<CR>", "Show tags" },
+  }
+

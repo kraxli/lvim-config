@@ -85,26 +85,26 @@ local plugins = {
 
   {
     'dkarter/bullets.vim',
-    ft = {'markdown', 'vimwiki'},
+    ft = {'markdown', 'vimwiki', 'text'},
     cmd = {'ToggleCheckbox'},
     setup = function()
       require("config.plugins.bullets").setup()
     end,
-    -- TODO: unmap <leader>x for ToggleCheckbox in plugin bullets.vim
-    -- config = function ()
-    --     print("run config for bullets")
-    --     lvim.keys.normal_mode["<leader>x"] = false
-    --     lvim.builtin.which_key.mappings["x"] = ""
-    --     lvim.builtin.which_key.mappings["x"] = {"<cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<CR>", "Harpoon Menu"}
-    -- end,
   },
 
   -- TODO:
   {
     "renerocksai/telekasten.nvim",
-    cmd = {'Telekasten'},
+    ft = {'markdown', 'vimwiki', 'text'},
+    cmd = {'Telekasten', 'Tk'},
+    keys = {'<leader>z'},
     config = function()
       require("config/plugins/telekasten")
+    end,
+    setup = function ()
+      vim.cmd([[
+        command! Tk :Telekasten
+      ]])
     end,
   },
 
