@@ -2,6 +2,7 @@
 -- Description: Custom file icons
 -- Credit: https://github.com/vuki656/nvim-config
 -- Link: https://github.com/kyazdani42/nvim-web-devicons
+-- Icons: https://www.nerdfonts.com/cheat-sheet
 
 local web_devicons = require("nvim-web-devicons")
 
