@@ -122,12 +122,6 @@ require('telekasten').setup({
  -- we could define [[ in **insert mode** to call insert link
  -- alternatively: leader [
 
--- vim.cmd([[
---  inoremap llii <ESC>:lua require('telekasten').insert_link({ i=true })<CR>
---  inoremap <leader>zt <ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>
---  inoremap <leader># <cmd>lua require('telekasten').show_tags({i = true})<cr>
--- ]])
-
 local keyOpts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('i', 'llii', "<ESC>:lua require('telekasten').insert_link({ i=true })<CR>", keyOpts)
 vim.api.nvim_set_keymap('i', '<leader>zt', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
