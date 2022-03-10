@@ -8,6 +8,7 @@ M.unmapKeys = function ()
   lvim.keys.normal_mode["<s-x>"] = false
   lvim.keys.normal_mode["<c-z>"] = false
   lvim.keys.normal_mode["q"] = false
+  lvim.keys.normal_mode["u"] = false
 end
 
 ------------------------------------------------------------------
@@ -18,6 +19,7 @@ M.generalVimKeys = function()
 
   -- TODO: unmap q from recording use it to close telescope and buffers
   -- TODO: map Q to recording
+  lvim.keys.normal_mode["<C-u>"] = ":undo<cr>"
 
   lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
   -- unmap a default keymapping
@@ -56,6 +58,13 @@ M.generalVimKeys = function()
   -- vim.api.nvim_set_keymap("", "\\<Down>", "require('cmp').mapping.select_next_item()", { expr = true, noremap = true })
   -- lvim.keys.normal_mode["wg"]  = '<cmd>call utils#toggle_background()<CR>'
 
+
+-- spelling and dictionary suggestions ---
+vim.cmd([[
+  noremap [z [sz=
+  noremap ]z ]sz=
+]])
+
   -- OPEN file, url, or directory
   lvim.keys.normal_mode["gx"] = false
   lvim.keys.normal_mode["<F6>"] = false
@@ -70,7 +79,10 @@ M.generalVimKeys = function()
   -- lvim.keys.normal_mode["gx"] = openFileUrl
   lvim.keys.normal_mode["gx"] = openAll
 
-  -- rafi
+------------------------------------------------------------------
+-- Rafi
+------------------------------------------------------------------
+
   vim.cmd([[
     " Re-select blocks after indenting in visual/select mode
     xnoremap < <gv
@@ -134,6 +146,26 @@ M.bulletsVim = function()
     -- call s:add_local_mapping('nnoremap', '<<', ':BulletPromote<cr>')
     -- call s:add_local_mapping('vnoremap', '>', ':BulletDemoteVisual<cr>')
     -- call s:add_local_mapping('vnoremap', '<', ':BulletPromoteVisual<cr>')
+end
+
+------------------------------------------------------------------
+-- Hop
+------------------------------------------------------------------
+
+M.hop = function()
+
+  lvim.keys.normal_mode["h"] = false
+  lvim.keys.normal_mode["H"] = false
+
+  lvim.keys.normal_mode["h"] = ":HopChar2<cr>"
+  lvim.keys.normal_mode["H"] = ":HopWord<cr>"
+
+  -- vim.api.nvim_del_keymap("n", 'H')
+  -- vim.api.nvim_del_keymap("n", 'h')
+  -- local opts = { noremap = true, silent = true }
+  -- vim.api.nvim_set_keymap("n", "h", ":HopChar2<cr>", opts)
+  -- vim.api.nvim_set_keymap("n", "H", ":HopWord<cr>", opts)
+
 end
 
 

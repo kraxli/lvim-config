@@ -23,8 +23,8 @@ end
 
 M.set_hop_keymaps = function()
   local opts = { noremap = true, silent = true }
-  vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", opts)
-  vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", opts)
+  -- vim.api.nvim_set_keymap("n", "h", ":HopChar2<cr>", opts)
+  -- vim.api.nvim_set_keymap("n", "H", ":HopWord<cr>", opts)
   vim.api.nvim_set_keymap(
     "n",
     "f",

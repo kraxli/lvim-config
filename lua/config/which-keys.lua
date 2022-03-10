@@ -7,6 +7,7 @@ lvim.builtin.which_key.mappings["c"] = {name = "Utils", w = {"<cmd>keeppatterns 
 local optsNormLocLeader = {mode = "n", prefix = "<localleader>"}
 local optsNormNoPrefix = {mode = "n", prefix = ""}
 local optsXmodeLocLeader = {mode = "x", prefix = "<localleader>"}
+local optsNmodeSemiCol = {mode = "n", prefix = ";"}
 
 local mapsNormNoPrefix = {
   m = {
@@ -85,6 +86,17 @@ local mapsXmodeLocLeader = {
   G = {'<cmd>lua require"config.plugins.telescope".pickers.grep_string_visual()<cr>', "Grep selection"},
 }
 
+local mapsNmodeSemicol = {
+
+  -- Spectre
+  h = { "<cmd>HopChar2<cr>", "HopChar2" },
+  H = { "<cmd>HopWord<cr>", "HopWord" },
+
+}
+
+-------------------------------------------------------
+-- Register which-keys --
+-------------------------------------------------------
 
 local whkOn, whk = pcall(require, "which-key")
 if not whkOn then
@@ -93,11 +105,13 @@ if not whkOn then
   require("config.no_which-key").viewKeys()
   require("config.no_which-key").telescope()
   require("config.no_which-key").nerdtree()
+  -- TODO: define non-which keys for Hop
 
 else
   whk.register(mapsNormNoPrefix, optsNormNoPrefix)
   whk.register(mapsNormLocLeader, optsNormLocLeader)
   whk.register(mapsXmodeLocLeader, optsXmodeLocLeader)
+  whk.register(mapsNmodeSemicol, optsNmodeSemiCol)
 end
 
 -------------------------------------------------------
@@ -150,7 +164,7 @@ lvim.builtin.which_key.mappings["T"] = {
 }
 
 
---------------------------------------------------
+-------------------------------------------------------
 -- Telekasten --
 -------------------------------------------------------
 
@@ -163,10 +177,11 @@ lvim.builtin.which_key.mappings["T"] = {
     f = { "<cmd>lua require('telekasten').find_notes()<CR>", "Find notes" },
     F = { "<cmd>lua require('telekasten').find_friends()<CR>", "Find friends" },
     g = { "<cmd>lua require('telekasten').search_notes()<CR>", "Search notes" },
-    i = { "<cmd>lua require('telekasten').paste_img_and_link()<CR>", "Paste img / link" },
+    i = { "<cmd>lua require('telekasten').paste_img_and_link()<CR>", "Paste img link" },
     I = { "<cmd>lua require('telekasten').insert_img_link({ i=true })<CR>", "Insert image link" },
-    ["["] = { "<cmd>lua require('telekasten').insert_link({ i=true })<CR>", "Insert link"},
     k = { "<cmd>Telekasten<CR>", "Telekasten" },
+    l = { "<cmd>lua require('telekasten').insert_link({ i=true })<CR>", "Insert link"},
+    ["["] = { "<cmd>lua require('telekasten').insert_link({ i=true })<CR>", "Insert link"},
     m = { "<cmd>lua require('telekasten').browse_media()<CR>", "Browse media" },
     n = { "<cmd>lua require('telekasten').new_note()<CR>", "New note" },
     N = { "<cmd>lua require('telekasten').new_templated_note()<CR>", "New template note" },
