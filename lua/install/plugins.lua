@@ -6,7 +6,32 @@ local plugins = {
     event = { "CursorMoved", "InsertEnter" },
   },
 
-  -- GIT
+  -- {
+  --   "lambdalisue/nerdfont.vim",  -- lazy by nature
+  -- },
+
+  {
+    'machakann/vim-sandwich',
+    keys = {'s'},
+    event = "BufReadPost",
+    config = function()
+      require('config.plugins.sandwich')
+    end,
+  },
+  -- alternative: machakann/vim-sandwich
+  {
+    'appelgriebsch/surround.nvim',
+    keys = {'s'},
+    event = "BufReadPost",
+    config = function()
+      require('config.plugins.surround-nvim')
+    end,
+    disable = 1,
+  },
+
+  -------------------------------------------------------
+  -- GIT --
+  -------------------------------------------------------
   {
     "TimUntersberger/neogit",
     requires = {'nvim-lua/plenary.nvim', 'diffview.nvim'},
@@ -64,6 +89,16 @@ local plugins = {
   -- TODO:
   {
     "renerocksai/telekasten.nvim",
+    ft = {'markdown', 'vimwiki', 'text'},
+    cmd = {'Telekasten', 'Tk'},
+    keys = {'<leader>z'},
+    event = "BufWinEnter",
+    setup = function ()
+      vim.cmd([[
+        command! Tk :Telekasten
+      ]])
+      require("config/plugins/telekasten")
+    end,
   },
 
   -- telescope-symbols.nvim

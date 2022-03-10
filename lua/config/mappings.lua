@@ -5,14 +5,20 @@ M.unmapKeys = function ()
   lvim.keys.normal_mode["<leader>c"] = false  -- close buffer: <c-b>
   lvim.builtin.which_key.mappings["c"] = {}
   lvim.keys.normal_mode["<leader>w"] = false  -- save: <c-q>
-  lvim.builtin.which_key.mappings["w"] = {}
+  -- lvim.builtin.which_key.mappings["w"] = {}
   -- TODO: unmap <c-z>
+  lvim.keys.normal_mode["y"] = false
+  lvim.keys.normal_mode["<s-x>"] = false
+  lvim.keys.normal_mode["<c-z>"] = false
+  lvim.keys.normal_mode["q"] = false
+  lvim.keys.normal_mode["u"] = false
 end
 
 M.generalVimKeys = function()
 
   -- TODO: unmap q from recording use it to close telescope and buffers
   -- TODO: map Q to recording
+  lvim.keys.normal_mode["<C-u>"] = ":undo<cr>"
 
   lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
   -- unmap a default keymapping
@@ -52,6 +58,13 @@ M.generalVimKeys = function()
   -- vim.api.nvim_set_keymap("", "\\<Down>", "require('cmp').mapping.select_next_item()", { expr = true, noremap = true })
   -- lvim.keys.normal_mode["wg"]  = '<cmd>call utils#toggle_background()<CR>'
 
+
+-- spelling and dictionary suggestions ---
+vim.cmd([[
+  noremap [z [sz=
+  noremap ]z ]sz=
+]])
+
   -- OPEN file, url, or directory
   lvim.keys.normal_mode["gx"] = false
   lvim.keys.normal_mode["<F6>"] = false
@@ -66,7 +79,10 @@ M.generalVimKeys = function()
   -- lvim.keys.normal_mode["gx"] = openFileUrl
   lvim.keys.normal_mode["gx"] = openAll
 
-  -- rafi
+------------------------------------------------------------------
+-- Rafi
+------------------------------------------------------------------
+
   vim.cmd([[
     " Re-select blocks after indenting in visual/select mode
     xnoremap < <gv
@@ -87,6 +103,66 @@ M.generalVimKeys = function()
   -- lvim.keys.visual_mode["gcc"] = "* <Esc><Cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>"
   -- nnoremap <Leader>cw
   -- vim.api.nvim_set_keymap('n', '<c-c>', "<cmd>BufferClose!<CR>", {})
+end
+
+------------------------------------------------------------------
+-- Telescope
+------------------------------------------------------------------
+
+M.telescope = function()
+  -- close telescope with q
+  vim.cmd('au! Filetype TelescopePrompt nmap q <esc>')
+end
+
+------------------------------------------------------------------
+-- bullets.vim
+------------------------------------------------------------------
+
+M.bulletsVim = function()
+  -- mappings:
+  lvim.keys.normal_mode["<C-Space>"] = false
+  lvim.keys.normal_mode["<C-Space>"] = "<cmd>ToggleCheckbox<CR>"
+
+    -- " automatic bullets
+    -- call s:add_local_mapping('inoremap', '<cr>', '<C-]><C-R>=<SID>insert_new_bullet()<cr>')
+    -- call s:add_local_mapping('inoremap', '<C-cr>', '<cr>')
+
+    -- call s:add_local_mapping('nnoremap', 'o', ':call <SID>insert_new_bullet()<cr>')
+
+    -- " Renumber bullet list
+    -- call s:add_local_mapping('vnoremap', 'gN', ':RenumberSelection<cr>')
+    -- call s:add_local_mapping('nnoremap', 'gN', ':RenumberList<cr>')
+
+    -- " Toggle checkbox
+    -- call s:add_local_mapping('nnoremap', '<leader>x', ':ToggleCheckbox<cr>')
+
+    -- " Promote and Demote outline level
+    -- call s:add_local_mapping('inoremap', '<C-t>', '<C-o>:BulletDemote<cr>')
+    -- call s:add_local_mapping('nnoremap', '>>', ':BulletDemote<cr>')
+    -- call s:add_local_mapping('inoremap', '<C-d>', '<C-o>:BulletPromote<cr>')
+    -- call s:add_local_mapping('nnoremap', '<<', ':BulletPromote<cr>')
+    -- call s:add_local_mapping('vnoremap', '>', ':BulletDemoteVisual<cr>')
+    -- call s:add_local_mapping('vnoremap', '<', ':BulletPromoteVisual<cr>')
+end
+
+------------------------------------------------------------------
+-- Hop
+------------------------------------------------------------------
+
+M.hop = function()
+
+  lvim.keys.normal_mode["h"] = false
+  lvim.keys.normal_mode["H"] = false
+
+  lvim.keys.normal_mode["h"] = ":HopChar2<cr>"
+  lvim.keys.normal_mode["H"] = ":HopWord<cr>"
+
+  -- vim.api.nvim_del_keymap("n", 'H')
+  -- vim.api.nvim_del_keymap("n", 'h')
+  -- local opts = { noremap = true, silent = true }
+  -- vim.api.nvim_set_keymap("n", "h", ":HopChar2<cr>", opts)
+  -- vim.api.nvim_set_keymap("n", "H", ":HopWord<cr>", opts)
+
 end
 
 return M
