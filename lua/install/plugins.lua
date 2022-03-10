@@ -115,9 +115,9 @@ local plugins = {
   -- TODO:
   {
     "renerocksai/telekasten.nvim",
-    ft = {'markdown', 'vimwiki', 'text'},
-    cmd = {'Telekasten', 'Tk'},
-    keys = {'<leader>z'},
+    -- ft = {'markdown', 'vimwiki', 'text'},
+    -- cmd = {'Telekasten', 'Tk'},
+    -- keys = {'<leader>z'},
     event = "BufWinEnter",
     setup = function ()
       vim.cmd([[
