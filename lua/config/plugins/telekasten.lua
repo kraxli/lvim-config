@@ -6,8 +6,10 @@
 -- - NEVER use "C:\Users\myname" style paths
 
 local home = vim.fn.expand("~/Dropbox/PKD")
--- local home = vim.fn.expand(dirPkd)
+-- local home = vim.fn.expand($dirPkd)
 
+-- vim.fn.fnamemodify(vim.fn.expand('%'), ':p:h:h') .. '/templates/'   -- join_paths()
+local dir_templates = os.getenv("LUNARVIM_CONFIG_DIR") .. "/templates"
 
 require('telekasten').setup({
     home = home,
@@ -16,12 +18,12 @@ require('telekasten').setup({
     take_over_my_home = true,
 
     -- auto-set telekasten filetype: if false, the telekasten filetype will not be used and thus the telekasten syntax will not be loaded either
-    auto_set_filetype = true,
+    auto_set_filetype = false,
 
     -- dir names for special notes (absolute path or subdir name)
     dailies      = home .. '/' .. 'daily',
     weeklies     = home .. '/' .. 'weekly',
-    templates    = home .. '/' .. 'templates',
+    templates    = dir_templates,
 
     -- image (sub)dir for pasting
     -- dir name (absolute path or subdir name)
@@ -38,15 +40,15 @@ require('telekasten').setup({
 
     -- template for new notes (new_note, follow_link)
     -- set to `nil` or do not specify if you do not want a template
-    template_new_note = home .. '/' .. 'templates/new_note.md',
+    template_new_note = dir_templates .. '/' .. 'new_note.md',
 
     -- template for newly created daily notes (goto_today)
     -- set to `nil` or do not specify if you do not want a template
-    template_new_daily = home .. '/' .. 'templates/daily.md',
+    template_new_daily = dir_templates .. '/' .. 'daily.md',
 
     -- template for newly created weekly notes (goto_thisweek)
     -- set to `nil` or do not specify if you do not want a template
-    template_new_weekly= home .. '/' .. 'templates/weekly.md',
+    template_new_weekly= dir_templates .. '/' .. 'weekly.md',
 
     -- image link style
     -- wiki:     ![[image name]]
@@ -88,10 +90,11 @@ require('telekasten').setup({
     -- - prefer_new_note: use `new_note` template
     -- - smart: if day or week is detected in title, use daily / weekly templates (default)
     -- - always_ask: always ask before creating a note
+
     template_handling = "smart",
 
     -- path handling:
-    --   this applies to:
+    --   this app
     --     - new_note()
     --     - new_templated_note()
     --     - follow_link() to non-existing note
