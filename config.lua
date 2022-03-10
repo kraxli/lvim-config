@@ -145,6 +145,8 @@ require("config.keybindings").unmapKeys()
 require("config.keybindings").generalVimKeys()
 require("config.keybindings").telescope()
 require("config.keybindings").bulletsVim()
+require("config.keybindings").hop()
+
 -- vim.cmd('au! FileType markdown,vimwiki,text lua require("config.keybindings").bulletsVim()')
 vim.cmd([[au! BufEnter * lua require("config.which-keys")]])
 

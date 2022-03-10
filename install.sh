@@ -1,15 +1,22 @@
 
+# -- General --
 sudo apt -y install npm
-
-sudo npm install -g markdownlint-cli  # vale replacement
-sudo pip install pyright pylsp
 sudo apt-get install xclip
+
+# -- Markdown --
+sudo npm install -g markdownlint-cli  # vale replacement
+sudo cargo install prosemd-lsp   # or download from https://github.com/kitten/prosemd-lsp/releases
+# echo 'export PATH="/home/dave/.cargo/bin:$PATH"' >> ~/.zshrc
+# echo 'export PATH="/home/dave/.cargo/bin:$PATH"' >> ~/.bashrc
+
+
+#  -- Python --
+sudo pip install pyright pylsp
 
 python3 -m pip install pyright pyls
 sudo python3 -m pip install pyright pyls
 
 # -- Lazy git --
-
 sudo add-apt-repository ppa:lazygit-team/release
 sudo apt-get update
 sudo apt-get install lazygit
@@ -18,6 +25,7 @@ sudo apt-get install lazygit
 
 # sudo apt install zoxide  # Ubuntu >21.04
 curl -sS https://webinstall.dev/zoxide | bash
+
 
 # =======================================================
 
