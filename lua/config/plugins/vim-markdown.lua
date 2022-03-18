@@ -23,11 +23,6 @@ vim.cmd([[
     "   \ 'makefile=make',
     "   \ 'py=python'
     "   \ ]
-
-    " --------------------------------------------"
-    " Plugin MarkdownPreview
-    " --------------------------------------------"
-    command! Pv :MarkdownPreview
 ]])
 
 

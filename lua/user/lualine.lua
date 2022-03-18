@@ -132,22 +132,6 @@ local function get_file_icon_color()
   end
 end
 
-local default_colors = {
-  bg = "#202328",
-  bg_alt = "#202328",
-  fg = "#bbc2cf",
-  yellow = "#ECBE7B",
-  cyan = "#008080",
-  darkblue = "#081633",
-  green = "#98be65",
-  orange = "#FF8800",
-  violet = "#a9a1e1",
-  magenta = "#c678dd",
-  blue = "#51afef",
-  red = "#ec5f67",
-  git = { change = "#ECBE7B", add = "#98be65", delete = "#ec5f67", conflict = "#bb7a61" },
-}
-
 M.config = function()
   local _time = os.date "*t"
   local colors = require("user.theme").current_colors()
@@ -206,7 +190,8 @@ M.config = function()
         normal = { c = { fg = colors.fg, bg = colors.bg } },
         inactive = { c = { fg = colors.fg, bg = colors.bg_alt } },
       },
-      disabled_filetypes = { "dashboard", "NvimTree", "Outline", "alpha", "vista", "vista_kind" },
+      disabled_filetypes = { "dashboard", "NvimTree", "Outline", "alpha", "vista", "vista_kind", "TelescopePrompt" },
+      globalstatus = lvim.builtin.global_statusline,
     },
     sections = {
       -- these are to remove the defaults
@@ -228,9 +213,6 @@ M.config = function()
       lualine_c = {
         {
           function()
-            vim.api.nvim_command(
-              "hi! LualineModeInactive guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg_alt
-            )
             local selector = math.floor(_time.hour / 8) + 1
             local icns = {
               "  ",
@@ -238,10 +220,10 @@ M.config = function()
               "  ",
             }
             return icns[selector]
-            -- return " "
-            -- return mode()
           end,
-          color = "LualineModeInactive",
+          color = function()
+            return { fg = mode_color[vim.fn.mode()], bg = colors.bg_alt }
+          end,
           padding = { left = 1, right = 0 },
         },
         {
@@ -266,10 +248,11 @@ M.config = function()
 
   ins_left {
     function()
-      vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
       return mode()
     end,
-    color = "LualineMode",
+    color = function()
+      return { fg = mode_color[vim.fn.mode()], bg = colors.bg }
+    end,
     padding = { left = 1, right = 0 },
   }
   ins_left {
@@ -332,9 +315,9 @@ M.config = function()
     source = diff_source,
     symbols = { added = "  ", modified = "柳", removed = " " },
     diff_color = {
-      added = { fg = colors.git.add },
-      modified = { fg = colors.git.change },
-      removed = { fg = colors.git.delete },
+      added = { fg = colors.git.add, bg = colors.bg },
+      modified = { fg = colors.git.change, bg = colors.bg },
+      removed = { fg = colors.git.delete, bg = colors.bg },
     },
     color = {},
     cond = nil,
@@ -440,7 +423,7 @@ M.config = function()
       end
       local buf_ft = vim.bo.filetype
       local buf_client_names = {}
-      local trim = vim.fn.winwidth(0) < 120
+      local trim = vim.fn.winwidth(0) < 117
 
       for _, client in pairs(buf_clients) do
         if client.name ~= "null-ls" then

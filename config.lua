@@ -50,6 +50,7 @@ lvim.builtin.sniprun = { active = false } -- enable/disable sniprun
 lvim.builtin.tag_provider = "symbols-outline" -- change this to use different tag providers ( symbols-outline or vista )
 lvim.builtin.editorconfig = { active = true } -- enable/disable editorconfig
 lvim.builtin.fancy_telescope = { active = false } -- telescope to the moon
+lvim.builtin.global_statusline = false -- set true to use global statusline
 
 local user = os.getenv "USER"
 if user and (user == "dave" or user == "s6s94k") then  -- abz
@@ -63,6 +64,7 @@ if user and (user == "dave" or user == "s6s94k") then  -- abz
   vim.g.instant_username = user
   lvim.builtin.collaborative_editing.active = true
   lvim.builtin.file_browser.active = true
+lvim.builtin.global_statusline = true
   require("user.prose").config() -- setup prosemd-lsp for my local use
 end
 lvim.lsp.diagnostics.virtual_text = false -- remove this line if you want to see inline errors

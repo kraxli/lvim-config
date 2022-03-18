@@ -85,6 +85,10 @@ local plugins = {
     -- setup = function() require("config.plugins.dap") end,
   },
 
+  {
+    'rafi/vim-venom',
+    ft = 'python',
+  },
   -------------------------------------------------------
   -- Markdown, Wiki, Notes, Tex, Tasks managment,
   -- Calendar, ...
@@ -105,6 +109,7 @@ local plugins = {
 
   {
     'dkarter/bullets.vim',
+    -- 'kraxli/bullets.vim',
     ft = {'markdown', 'vimwiki', 'text'},
     cmd = {'ToggleCheckbox'},
     setup = function()
@@ -136,12 +141,28 @@ local plugins = {
     'renerocksai/calendar-vim',
   },
 
+
+  {
+    -- 'jghauser/follow-md-links.nvim',
+    'jakewvincent/mkdnflow.nvim',
+    ft = {'markdown', 'text', 'vimwiki'},
+  },
+
+  -- evaluate code blocks within markdown
+  -- {
+  --   'jubnzv/mdeval.nvim',
+  --   cmd = 'MdEval',
+  --   config = function ()
+  --     require("config/plugins/mdeval.lua")
+  --   end
+  -- },
+
   -------------------------------------------------------
   -- colors
   -------------------------------------------------------
 
   -- lazy by nature
-	{
+  {
     "Th3Whit3Wolf/one-nvim",
   },
 

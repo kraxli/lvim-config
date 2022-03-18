@@ -1,7 +1,12 @@
 
 # To Dos
 
+
 - [ ] how to format with Lsp-formatter
+- [ ] jbyuki/one-small-step-for-vimkind
+- [ ] python virtual envs
+- [ ] open link under cursor see:
+  - [ ] ...
 - [◐] DAP: functionality:
   - [ ] automatically open repl
   - [✓] how to bring up scope, frames, ...
@@ -9,16 +14,23 @@
 - [ ] apply right fonts such that also luatree items are all correct (especially file types)
 - [ ] machakann/vim-sandwich or appelgriebsch/surround.nvim (surround)
 - [ ] Telekasten
-- CheckBox:
+- [ ] CheckBox:
   - [ ] toggle checkBox function:
     - lua/utils/mkd.lua  (combination of functionality of bullets.nvim and Telekasten)
     - simply apply right function with <c-space> given the line pattern (normal and visual model. Visual mode via loop)
-  - Telekasten: nnoremap <leader>zt :lua require('telekasten').toggle_todo()<CR>
-  - Telekasten: inoremap <leader>zt <ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>
+  - [ ] Telekasten: nnoremap <leader>zt :lua require('telekasten').toggle_todo()<CR>    (does also include a box)
+  - [ ] Telekasten: inoremap <leader>zt <ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>
+  - [ ] unmap <leader>x for ToggleCheckbox in plugin bullets.vim
+  - [ ] toggle mulitple items (with loop)
 - [✓] close Telescope with "q"
 - [✓] LSP signature plugin?
+- [✓] load local settings
+- [✓] nmap: z[ z]
+- [ ] markdown: open link under cursor (see vimwiki)
 - [ ] Gitblame sidebar
-- [ ] load local settings
+
+  asdf [[00_Do_Read]]
+  adf #tag
 
   ```vim
   let g:local_source_dir = fnamemodify(expand('<sfile>'), ':h').'/local/'
@@ -38,4 +50,3 @@
 ## Longer term / second prio
 
 - [ ] copilot (tpope): https://github.com/github/copilot.vim
-- [ ] unmap <leader>x for ToggleCheckbox in plugin bullets.vim

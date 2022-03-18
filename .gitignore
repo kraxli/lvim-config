@@ -1,6 +1,7 @@
 
 # Directories
 /local/
+/lua/local/*
 /undodir/
 
 # Dot files
@@ -46,6 +47,8 @@ luac.out
 *.so.*
 *.dylib
 
+# Spell
+*.spl
 # Executables
 *.exe
 *.out

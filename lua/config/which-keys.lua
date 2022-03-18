@@ -48,7 +48,11 @@ local mapsNormNoPrefix = {
 local mapsNormLocLeader = {
 
     -- Telescope general pickers
+    a = { "<Cmd>NvimTreeToggle<CR>", "Nvimtree toggle"},  -- Nvimtree
     b = {'<cmd>Telescope buffers<CR>', "Buffers"},
+    c = { '<cmd>Telescope command_history<CR>', "Command history"},
+    d = { '<cmd>lua require"config.plugins.telescope".pickers.plugin_directories()<CR>', "Directories"},
+    e = { "<Cmd>NvimTreeToggle<CR>", "Nvimtree toggle"},  -- Nvimtree
     f = {'<cmd>Telescope find_files<CR>', "Files"},
     g = {'<cmd>Telescope live_grep<CR>', "Live grep"},
     -- TODO: not working
@@ -57,6 +61,8 @@ local mapsNormLocLeader = {
     H = {'<cmd>Telescope search_history<CR>', "Search history"},
     j = {'<cmd>Telescope jumplist<CR>', "Jumplist"},
     m = {'<cmd>Telescope marks<CR>', "Marks"},
+    n = { "<cmd>lua require('telescope').extensions.notify.notify()<cr>", 'Notifications' },  -- require("telescope").load_extension("notify")
+    N = { '<cmd>lua require"config.plugins.telescope".pickers.notebook()<CR>', "Notebook"},
     p = {'<cmd>Telescope projects<CR>', "Projects"},
     o = {'<cmd>Telescope vim_options<CR>', "Vim options"},
     r = {'<cmd>Telescope resume<CR>', "Resume last"},
@@ -69,13 +75,6 @@ local mapsNormLocLeader = {
     v = {'<cmd>Telescope registers<CR>', "Registers"},
     x = {'<cmd>Telescope oldfiles<CR>', "Files old"},
     z = {'<cmd>Zoxide<CR>', "Zoxide"},
-    c = { '<cmd>Telescope command_history<CR>', "Command history"}, -- ;
-    n = { '<cmd>lua require"config.plugins.telescope".pickers.plugin_directories()<CR>', "Directories"},
-    w = { '<cmd>lua require"config.plugins.telescope".pickers.notebook()<CR>', "Notebook"},
-
-    -- Nvimtree
-    a = { "<Cmd>NvimTreeToggle<CR>", "Nvimtree toggle"},
-    e = { "<Cmd>NvimTreeToggle<CR>", "Nvimtree toggle"},
 }
 
 

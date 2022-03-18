@@ -3,6 +3,7 @@
 setl foldmethod=expr foldenable
 setl foldexpr=markdown#MkdFoldSimple(v:lnum)
 setl spell spelllang=en,de
+setl conceallevel=2
 
 " for more languages see: https://support.codebasehq.com/articles/tips-tricks/syntax-highlighting-in-markdown
 let g:vim_markdown_fenced_languages = [
@@ -37,5 +38,4 @@ let b:sleuth_automatic = 0
 " 	autocmd FileType markdown let b:sleuth_automatic = 0
 " 
 " augroup END
-
 
