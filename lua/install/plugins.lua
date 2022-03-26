@@ -2,7 +2,7 @@ local plugins = {
 
   -- General
   {
-    "romainl/vim-cool",
+    "romainl/vim-cool", -- disables search highlighting when you are done
     event = { "CursorMoved", "InsertEnter" },
   },
 
