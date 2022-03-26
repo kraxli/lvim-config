@@ -45,14 +45,6 @@ local plugins = {
       require('config.plugins.neogit')
     end
   },
-    -- cwd to the project's root directory
-  {
-    "ahmedkhalf/lsp-rooter.nvim",
-    event = "BufRead",
-    config = function()
-      require("lsp-rooter").setup()
-    end,
-  },
 
   {
     'chentau/marks.nvim',
