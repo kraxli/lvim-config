@@ -47,3 +47,7 @@ If you want ideas for configuring LunarVim you can look at these repositories.
 # Plugins
 
 `rcarriga/nvim-notify`: A fancy, configurable, notification manager for NeoVim (messages, error, popup)
+
+# Spell files
+
+http://ftp.vim.org/vim/runtime/spell/de/
