@@ -1,6 +1,10 @@
 local plugins = {
 
   -- General
+  {
+    "romainl/vim-cool",
+    event = { "CursorMoved", "InsertEnter" },
+  },
 
   -- GIT
   {
