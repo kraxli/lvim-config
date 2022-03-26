@@ -46,14 +46,14 @@ I've customized my ZSH/Tmux/Alacritty too much, so it might not work properly �
 
 Themes are automatically changed based on time of the day:
 
-| Theme                                                                              |      Time of the day       |
-| ---------------------------------------------------------------------------------- | :------------------------: |
-| [rose-pine](https://github.com/rose-pine/neovim)                                   |         [1am, 9am)         |
-| [tokyonight](https://github.com/folke/tokyonight)                                  |         [9am, 5pm)         |
-| [doom-one](https://github.com/abzcoding/doom-one.nvim/tree/feat/nvim-cmp-floating) |         [5pm, 9pm)         |
-| [kanagawa](https://github.com/rebelot/kanagawa.nvim)                               | [9pm, 11:59pm), [0am, 1am] |
+| Theme                                                |      Time of the day       |
+| ---------------------------------------------------- | :------------------------: |
+| [rose-pine](https://github.com/rose-pine/neovim)     |         [1am, 9am)         |
+| [tokyonight](https://github.com/folke/tokyonight)    |         [9am, 5pm)         |
+| [catppuccin](https://github.com/catppuccin/nvim)     |         [5pm, 9pm)         |
+| [kanagawa](https://github.com/rebelot/kanagawa.nvim) | [9pm, 11:59pm), [0am, 1am] |
 
-You can change this in [plugins.lua](./lua/user/plugins.lua) and [lualine.lua](./lua/user/lualine.lua)
+You can change this in [plugins.lua](./lua/user/plugins.lua) and [theme.lua](./lua/user/theme.lua)
 
 ## Customization
 
@@ -70,17 +70,13 @@ You can change this in [plugins.lua](./lua/user/plugins.lua) and [lualine.lua](.
   - `lvim.builtin.harpoon = { active = false }`
 - if you want to try out GitHub copilot, change the following
   - `lvim.builtin.sell_your_soul_to_devil = true`
-- I'm using a custom dashboard, use the default LunarVim one if you like it better
-  - `lvim.builtin.fancy_dashboard = { active = false }`
 - I use a custom `lualine` disable it if you don't like it
   - `lvim.builtin.fancy_statusline = { active = false }`
-- I'm using `bufferline` instead of `barbar`, if you don't like it, disable it
-  - `lvim.builtin.fancy_bufferline = { active = false }`
 - You can use the fancy wild menu if you want, make sure to do a `:UpdateRemotePlugins`
   - `lvim.builtin.fancy_wild_menu = { active = true }`
 - You can use the `diffview` plugin instead of normal `gitsigns diff`
   - `lvim.builtin.fancy_diff = { active = true }`
-- if you want to use debugging, change the following line to true:
+- if you want to use debugging, change the following line to true, also [install codelldb](<https://github.com/mfussenegger/nvim-dap/wiki/C-C---Rust-(via--codelldb)>):
   - `lvim.builtin.dap.active = true`
 - sometimes instead of saving you jump trough jumplist 😢 just disable nvim-lastplace
   - `lvim.builtin.lastplace = { active = false }`
@@ -104,7 +100,6 @@ You can change this in [plugins.lua](./lua/user/plugins.lua) and [lualine.lua](.
   - `lvim.builtin.async_tasks = { active = true }`
 - If you wanna see the issues, remove `lvim.lsp.diagnostics.virtual_text = false`
 - I'm using `skim` for `latex` stuff, change it to `zathura` if you are on `linux`
-- Using tailwinds CSS for markdown, disable it if you want
 
 <!--
 - orgmode is using `~/shared/orgs` folder
@@ -368,12 +363,13 @@ _Symbols Outline_
 - [Neogen](https://github.com/danymat/neogen)
 - [Vimtex](https://github.com/lervag/vimtex)
 - [nvim-lsp-ts-utils](https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils)
-- [Bufferline](https://github.com/akinsho/bufferline.nvim)
 - [flutter-tools.nvim](https://github.com/akinsho/flutter-tools.nvim)
 - [NeoClip](https://github.com/AckslD/nvim-neoclip.lua)
 - [Telescope live grep raw](nvim-telescope/telescope-live-grep-raw.nvim)
 - [nvim-lightbulb](https://github.com/kosayoda/nvim-lightbulb)
 - [fidget](https://github.com/j-hui/fidget.nvim)
+- [clangd_extensions.nvim](https://github.com/p00f/clangd_extensions.nvim)
+- [crates.nvim](https://github.com/Saecki/crates.nvim)
 
 ### Optional Plugins
 
@@ -390,7 +386,6 @@ _Symbols Outline_
 - [vim-test](https://github.com/vim-test/vim-test)
 - [vim-ultest](https://github.com/rcarriga/vim-ultest)
 - [nvim-cheat](https://github.com/RishabhRD/nvim-cheat.sh)
-- [alpha-nvim](https://github.com/goolord/alpha-nvim)
 - [vim-dadbod](https://github.com/tpope/vim-dadbod)
 - [vim-dadbod-completion](https://github.com/kristijanhusak/vim-dadbod-completion)
 - [vim-dadbod-ui](https://github.com/kristijanhusak/vim-dadbod-ui)
@@ -407,6 +402,9 @@ _Symbols Outline_
 - [asyncrun.vim](https://github.com/skywind3000/asyncrun.vim)
 - [nvim-metals](https://github.com/scalameta/nvim-metals)
 - [instant.nvim](https://github.com/jbyuki/instant.nvim)
+- [SnipRun](https://github.com/michaelb/sniprun)
+- [Vista](https://github.com/liuchengxu/vista.vim)
+- [editorconfig-vim](https://github.com/editorconfig/editorconfig-vim)
 
 </details>
 
@@ -475,8 +473,8 @@ Note that,
 | --------------------------- | :--: | ----------------------- | ------------------------------------------------------------------- |
 | <kbd>f</kbd>                |  𝐍   | find next character     | <small>HopChar1CurrentLineAC</small> or <small>Lightspeed_f</small> |
 | <kbd>F</kbd>                |  𝐍   | find previous character | <small>HopChar1CurrentLineBC</small> or <small>Lightspeed_F</small> |
-| <kbd>s</kbd>                |  𝐍   | find character          | <small>HopChar2</small> or <small>Lightspeed_s</small>              |
-| <kbd>S</kbd>                |  𝐍   | find word               | <small>HopWord</small> or <small>Lightspeed_S</small>               |
+| <kbd>s</kbd>                |  𝐍   | find character          | <small>HopChar2MW</small> or <small>Lightspeed_s</small>            |
+| <kbd>S</kbd>                |  𝐍   | find word               | <small>HopWordMW</small> or <small>Lightspeed_S</small>             |
 | <kbd>Alt</kbd>+<kbd>a</kbd> |  𝐈   | select all              | <small>ggVG</small>                                                 |
 | <kbd>Alt</kbd>+<kbd>a</kbd> |  𝐍   | increment number        | <small>C-A</small>                                                  |
 | <kbd>Alt</kbd>+<kbd>x</kbd> |  𝐍   | decrement number        | <small>C-X</small>                                                  |
@@ -541,7 +539,7 @@ Note that,
 | <kbd>Space</kbd>+<kbd>P</kbd>              |  𝐍   | Project search             |
 | <kbd>Space</kbd>+<kbd>s</kbd>+<kbd>s</kbd> |  𝐍   | Grep search                |
 | <kbd>Space</kbd>+<kbd>s</kbd>+<kbd>f</kbd> |  𝐍   | Telescope find_files       |
-| <kbd>Space</kbd>+<kbd>s</kbd>+<kbd>F</kbd> |  𝐍   | Telescope file_browser     |
+| <kbd>Space</kbd>+<kbd>s</kbd>+<kbd>e</kbd> |  𝐍   | Telescope file_browser     |
 | <kbd>Space</kbd>+<kbd>F</kbd>+<kbd>l</kbd> |  𝐍   | Reopen last search         |
 | <kbd>Space</kbd>+<kbd>b</kbd>+<kbd>f</kbd> |  𝐍   | Buffers                    |
 | <kbd>Space</kbd>+<kbd>s</kbd>+<kbd>c</kbd> |  𝐍   | Colorschemes               |
@@ -600,10 +598,15 @@ Note that,
 
 | Key                                        | Mode | Action               |
 | ------------------------------------------ | :--: | -------------------- |
+| <kbd>Shift</kbd>+<kbd>x</kbd>              |  𝐍   | close buffer         |
 | <kbd>Space</kbd>+<kbd>b</kbd>+<kbd>f</kbd> |  𝐍   | find buffer          |
 | <kbd>Space</kbd>+<kbd>b</kbd>+<kbd>b</kbd> |  𝐍   | toggle buffer groups |
 | <kbd>Space</kbd>+<kbd>b</kbd>+<kbd>p</kbd> |  𝐍   | pick buffer          |
 | <kbd>Space</kbd>+<kbd>b</kbd>+<kbd>1</kbd> |  𝐍   | goto buffer 1        |
+| <kbd>Space</kbd>+<kbd>b</kbd>+<kbd>h</kbd> |  𝐍   | Close all to left    |
+| <kbd>Space</kbd>+<kbd>b</kbd>+<kbd>l</kbd> |  𝐍   | Close all to right   |
+| <kbd>Space</kbd>+<kbd>b</kbd>+<kbd>D</kbd> |  𝐍   | Sort by directory    |
+| <kbd>Space</kbd>+<kbd>b</kbd>+<kbd>L</kbd> |  𝐍   | Sort by language     |
 
 ### Plugin: Trouble
 

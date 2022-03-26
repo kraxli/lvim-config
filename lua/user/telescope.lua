@@ -53,11 +53,7 @@ function M.layout_config()
     prompt_position = "bottom",
     horizontal = {
       preview_width = function(_, cols, _)
-        if cols > 200 then
-          return math.floor(cols * 0.5)
-        else
-          return math.floor(cols * 0.6)
-        end
+        return math.floor(cols * 0.6)
       end,
     },
     vertical = {
@@ -101,73 +97,17 @@ function M.find_string()
   builtin.live_grep(opts)
 end
 
--- fince file browser using telescope instead of lir
-function M.file_browser()
-  local opts
-
-  opts = {
-    sorting_strategy = "ascending",
-    scroll_strategy = "cycle",
-    layout_config = {
-      prompt_position = "top",
-    },
-    file_ignore_patterns = { "vendor/*" },
-
-    attach_mappings = function(prompt_bufnr, map)
-      local current_picker = action_state.get_current_picker(prompt_bufnr)
-
-      local modify_cwd = function(new_cwd)
-        current_picker.cwd = new_cwd
-        current_picker:refresh(opts.new_finder(new_cwd), { reset_prompt = true })
-      end
-
-      map("i", "-", function()
-        modify_cwd(current_picker.cwd .. "/..")
-      end)
-
-      map("i", "~", function()
-        modify_cwd(vim.fn.expand "~")
-      end)
-
-      local modify_depth = function(mod)
-        return function()
-          opts.depth = opts.depth + mod
-
-          local this_picker = action_state.get_current_picker(prompt_bufnr)
-          this_picker:refresh(opts.new_finder(current_picker.cwd), { reset_prompt = true })
-        end
-      end
-
-      map("i", "<M-=>", modify_depth(1))
-      map("i", "<M-+>", modify_depth(-1))
-
-      map("n", "yy", function()
-        local entry = action_state.get_selected_entry()
-        vim.fn.setreg("+", entry.value)
-      end)
-
-      return true
-    end,
-  }
-
-  builtin.file_browser(opts)
-end
-
 -- show code actions in a fancy floating window
 function M.code_actions()
   local opts = {
-    winblend = 15,
     layout_config = {
       prompt_position = "top",
       width = 80,
       height = 12,
     },
-    borderchars = {
-      prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-      results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
-      preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-    },
+    winblend = 0,
     border = {},
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     previewer = false,
     shorten_path = false,
   }
@@ -229,7 +169,6 @@ function M.find_updir()
 
   builtin.find_files(opts)
 end
-
 
 function M.installed_plugins()
   builtin.find_files {

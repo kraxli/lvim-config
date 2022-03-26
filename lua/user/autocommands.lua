@@ -109,7 +109,7 @@ augroup END
     { "Filetype", "typescript,typescriptreact", "nnoremap gS <Cmd>TSLspOrganize<CR>" },
 
     -- uncomment the following if you want to show diagnostics on hover
-    -- { "CursorHold", "*", "lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })" },
+    -- { "CursorHold", "*", "lua vim.diagnostic.open_float(0,{scope='line'})" },
   }
 end
 
@@ -164,6 +164,9 @@ M.make_run = function()
       "rust",
       "nnoremap <leader>r <cmd>lua require('rust-tools.runnables').runnables()<CR>",
     },
+
+    -- toml
+    { "FileType", "toml", "lua require('cmp').setup.buffer { sources = { { name = 'crates' } } }" },
   }
 end
 

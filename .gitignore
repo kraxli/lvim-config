@@ -44,3 +44,4 @@ plugin/
 
 # External tools
 *vale
+.luacheckcache
