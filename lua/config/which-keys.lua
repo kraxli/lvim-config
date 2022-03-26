@@ -1,6 +1,8 @@
 
 lvim.builtin.which_key.mappings["c"] = {}
 lvim.builtin.which_key.mappings["w"] = {}
+-- lvim.keys.normal_mode["y"] = false
+-- lvim.keys.normal_mode["<s-x>"] = false
 
 lvim.builtin.which_key.mappings["c"] = {name = "Utils", w = {"<cmd>keeppatterns %substitute/\\s\\+$//e<CR>", "Whitespce remove"} }
 

@@ -134,7 +134,7 @@ require("install.plugins")
 require("config.commands")
 require("config.mappings").unmapKeys()
 require("config.mappings").generalVimKeys()
-vim.cmd([[au! BufEnter * lua require("config.which_keys")]])
+vim.cmd([[au! BufEnter * lua require("config.which-keys")]])
 
 require("config.plugins.nvimtree")
 require("config.plugins.telescope")
