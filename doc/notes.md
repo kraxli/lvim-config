@@ -49,7 +49,7 @@ If you want ideas for configuring LunarVim you can look at these repositories.
 
 ## Packer
 
-In case of compile (e.g. lsp-compile) errors or issues with (lazy) loading plugins, delete `~/.config/lvim/plugin` folder and run `PackerCompile`.
+Errors after `lvim +q`:  In case of compile (e.g. lsp-compile) errors or issues with (lazy) loading plugins, delete `~/.config/lvim/plugin` folder and run `PackerCompile`.
 
 # Spell files
 
