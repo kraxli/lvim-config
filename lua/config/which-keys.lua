@@ -120,8 +120,7 @@ end
 -- LSP --
 -------------------------------------------------------
 
--- require("which-key").register { ["<leader>gd"] = "diffview: diff HEAD" }
-lvim.builtin.which_key.mappings['gd'] = {"<cmd>diffview: diff HEAD" }
+-- lvim.builtin.which_key.mappings['gd'] = {"<cmd>diffview: diff HEAD" }
 
 -------------------------------------------------------
 -- LSP --
