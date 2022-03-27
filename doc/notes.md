@@ -27,7 +27,6 @@ packer plugins directory: `/home/dave/.local/share/lunarvim/site/pack/packer`
 
 - one-nvim
 
-
 # lvim-config
 
 Kraxli's LunarVim Config
@@ -46,8 +45,16 @@ If you want ideas for configuring LunarVim you can look at these repositories.
 
 # Plugins
 
-`rcarriga/nvim-notify`: A fancy, configurable, notification manager for NeoVim (messages, error, popup)
+- `rcarriga/nvim-notify`: A fancy, configurable, notification manager for NeoVim (messages, error, popup)
+
+## Packer
+
+In case of compile (e.g. lsp-compile) errors or issues with (lazy) loading plugins, delete `~/.config/lvim/plugin` folder and run `PackerCompile`.
 
 # Spell files
 
 http://ftp.vim.org/vim/runtime/spell/de/
+
+# Vim / Neovim
+
+ You can use the following name to view Buftype settings, when Buftype=nofile, cannot save the file, only when buftype= empty, can save

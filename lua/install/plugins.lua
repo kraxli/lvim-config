@@ -70,11 +70,11 @@ local plugins = {
   ------------------------------------------------------------------
   -- LSP / DAP
   ------------------------------------------------------------------
-  -- {
-  --     "ray-x/lsp_signature.nvim",
-  --     config = function() require"lsp_signature".on_attach({toggle_key = '<M-a>', hi_parameter = "LspSignatureActiveParameter"}) end,
-  --     event = "BufRead", -- for setup
-  -- },
+  {
+    "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+    event = "BufReadPost", -- FileType BufRead
+    cmd = {"ToggleDiag"},
+  },
 
   -- R support
   {"jalvesaq/Nvim-R"},
@@ -132,11 +132,11 @@ local plugins = {
     ft = {'markdown', 'vimwiki', 'text'},
     cmd = {'Telekasten', 'Tk'},
     keys = {'<leader>z'},
-    setup = function ()
+    config = function ()
       vim.cmd([[
         command! Tk :Telekasten
       ]])
-      require("config/plugins/telekasten")
+      require("config.plugins.telekasten")
     end,
   },
 
