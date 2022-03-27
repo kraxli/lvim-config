@@ -9,8 +9,7 @@ local web_devicons = require("nvim-web-devicons")
 ----------------------------------- SETUP ------------------------------------------------
 ------------------------------------------------------------------------------------------
 
-web_devicons.setup({
-     override = {
+web_devicons.set_icon{
       [".babelrc"] = {
         icon = "ﬥ",
         color = "#cbcb41",
@@ -1340,11 +1339,9 @@ web_devicons.setup({
           color = '#6d8086',
           name = "Default",
       },
-  },
+
   -- globally enable default icons (default to false)
   -- will get overriden by `get_icons` option
-  default = true,
-})
-
--- web_devicons.set_default_icon('', '#6d8086')
+  -- default = true,
+}
 
