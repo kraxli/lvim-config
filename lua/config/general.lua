@@ -1,8 +1,11 @@
 
 -- general
 -------------------------------------------------------
+-- see, e.g.: https://icyphox.sh/blog/nvim-lua/
 vim.g.maplocalleader = ','
 vim.wo.relativenumber = false
+vim.o.number = true
+vim.wo.number = true
 -- vim.o.cmdheight=2
 
 -- timeing:
