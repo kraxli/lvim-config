@@ -3,10 +3,15 @@ local M = {}
 M.unmapKeys = function ()
   -- unmap keys
   lvim.keys.normal_mode["<leader>c"] = false  -- close buffer: <c-b>
+  lvim.builtin.which_key.mappings["c"] = {}
   lvim.keys.normal_mode["<leader>w"] = false  -- save: <c-q>
+  lvim.builtin.which_key.mappings["w"] = {}
   lvim.keys.normal_mode["y"] = false
   lvim.keys.normal_mode["<s-x>"] = false
-  lvim.keys.normal_mode["<c-z>"] = false
+  -- vim.cmd([[
+  --   noremap <c-z> <nop>
+  --   unset suspend
+  -- ]])
   lvim.keys.normal_mode["q"] = false
   lvim.keys.normal_mode["u"] = false
 end
@@ -26,8 +31,9 @@ M.generalVimKeys = function()
   -- lvim.keys.normal_mode["<C-Up>"] = ""
   -- edit a default keymapping
 
-  lvim.keys.normal_mode["q"] = '<cmd>quit<cr>'
-  lvim.keys.normal_mode["<c-q>"] = "<cmd>bd<cr>"  -- ":bd<cr>"
+  lvim.keys.normal_mode["q"] = '<cmd>quit<cr>' -- ":bd<cr>"
+  lvim.keys.normal_mode["<C-q>"] = ":bd<cr>" 
+  -- vim.api.nvim_set_keymap('', '<c-b>', ":bd<CR>", {})
 
   vim.api.nvim_set_keymap('', '<c-PageDown>', "<Cmd>bp<CR>", {})
   vim.api.nvim_set_keymap('', '<c-PageUp>', "<Cmd>bn<CR>", {})
@@ -97,9 +103,6 @@ vim.cmd([[
     nmap <  <<_
   ]])
 
-  -- TODO: handle re-selct gv
-
-
   -- EXAMPLES:
   -- v  <Space>/    * <Esc><Cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>
   -- lvim.keys.normal_mode["gcc"] = "<Esc><Cmd>lua require('Comment.api').toggle_linewise_op()<CR>"
@@ -167,6 +170,5 @@ M.hop = function()
   -- vim.api.nvim_set_keymap("n", "H", ":HopWord<cr>", opts)
 
 end
-
 
 return M

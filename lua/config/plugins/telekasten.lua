@@ -129,8 +129,8 @@ require('telekasten').setup({
 
 local keyOpts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('i', 'llii', "<ESC>:lua require('telekasten').insert_link({ i=true })<CR>", keyOpts)
-vim.api.nvim_set_keymap('i', '<leader>zt', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
-vim.api.nvim_set_keymap('i', '<leader>#', "<cmd>lua require('telekasten').show_tags({i = true})<cr>", keyOpts)
+vim.api.nvim_set_keymap('i', '<c-t>', "<ESC>:lua require('telekasten').toggle_todo({ i=true })<CR>", keyOpts)
+vim.api.nvim_set_keymap('i', '<c-#>', "<cmd>lua require('telekasten').show_tags({i = true})<cr>", keyOpts)
 
-vim.api.nvim_set_keymap('i', '<Leader><Space>', ':set hlsearch!<CR>', keyOpts)
+vim.api.nvim_set_keymap('n', '<Leader><Space>', ':set hlsearch!<CR>', keyOpts)
 

@@ -141,9 +141,9 @@ require("install.plugins")
 -- load specific configurations
 -- -------------------------------------------------------
 require("config.commands")
-require("config.mappings").unmapKeys()
-require("config.mappings").generalVimKeys()
-require("config.commands").telescope()
+-- require("config.mappings").unmapKeys()
+-- require("config.mappings").generalVimKeys()
+-- require("config.commands").telescope()
 require("config.keybindings").unmapKeys()
 require("config.keybindings").generalVimKeys()
 require("config.keybindings").telescope()
