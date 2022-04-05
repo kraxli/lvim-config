@@ -1,7 +1,18 @@
 
 # To Dos
 
+toggle virutal text without signs:
 
+Commands and keypbindings for
+
+nnoremap <silent> <Plug>(toggle-lsp-diag-underline) <cmd>lua require'toggle_lsp_diagnostics'.toggle_underline()<CR>
+nnoremap <silent> <Plug>(toggle-lsp-diag-signs) <cmd>lua require'toggle_lsp_diagnostics'.toggle_signs()<CR>
+nnoremap <silent> <Plug>(toggle-lsp-diag-vtext) <cmd>lua require'toggle_lsp_diagnostics'.toggle_virtual_text()<CR>
+nnoremap <silent> <Plug>(toggle-lsp-diag-update_in_insert) <cmd>lua require'toggle_lsp_diagnostics'.toggle_update_in_insert()<CR>
+ 
+- [ ] add matlab support
+- [ ] add vimwiki
+- [ ] add Gina
 - [ ] how to format with Lsp-formatter
 - [ ] jbyuki/one-small-step-for-vimkind
 - [ ] python virtual envs

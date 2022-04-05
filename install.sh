@@ -1,15 +1,34 @@
 
+#######################################################
+# pre-requisits
+#######################################################
+
+# homebrew: https://www.how2shout.com/linux/how-to-install-brew-ubuntu-20-04-lts-linux/
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
+# echo 'export "PATH=$PATH:~/linuxbrew/.linuxbrew/bin/brew" >> ~/.zshrc'
+# echo 'export "PATH=$PATH:~/linuxbrew/.linuxbrew/bin/brew" >> ~/.bashrc'
+brew install gcc
+brew doctor
+
 sudo apt -y install npm
 
-sudo npm install -g markdownlint-cli
-sudo pip install pyright pylsp
+#######################################################
+# install packages and tools
+#######################################################
+
+# -- general --
 sudo apt-get install xclip
 
-python3 -m pip install pyright pyls
+# -- markdwon --
+sudo npm install -g markdownlint-cli
+brew install vale
+
+# python:
+sudo pip install pyright pylsp
 sudo python3 -m pip install pyright pyls
 
-# -- Lazy git --
-
+# -- lazy git --
 sudo add-apt-repository ppa:lazygit-team/release
 sudo apt-get update
 sudo apt-get install lazygit
@@ -24,6 +43,7 @@ pip install vim-vint  # for vim linting
 # install llvm and clang_format for clang stuff
 npm install -g @fsouza/prettierd # if you want to use prettierd
 pip install yapf flake8 black  # for python stuff
+
 # if you want to use the markdown thingy
 # brew install vale markdownlint-cli
 # cp -r ~/.config/lvim/.vale ~/.config/vale
