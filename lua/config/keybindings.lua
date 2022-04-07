@@ -32,7 +32,7 @@ M.generalVimKeys = function()
   -- edit a default keymapping
 
   lvim.keys.normal_mode["q"] = '<cmd>quit<cr>' -- ":bd<cr>"
-  lvim.keys.normal_mode["<C-q>"] = ":bd<cr>" 
+  lvim.keys.normal_mode["<C-q>"] = ":bd<cr>"
   -- vim.api.nvim_set_keymap('', '<c-b>', ":bd<CR>", {})
 
   vim.api.nvim_set_keymap('', '<c-PageDown>', "<Cmd>bp<CR>", {})

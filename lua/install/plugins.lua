@@ -98,11 +98,17 @@ local plugins = {
   },
 
   ------------------------------------------------------------------
-  -- notetaking, wiki, markdonw, tex
+  -- journaling, notetaking, wiki, markdonw, tex
   ------------------------------------------------------------------
+
+  -- markdownflow
+
   {
     'renerocksai/calendar-vim',
   },
+
+  -- { 'mracos/mermaid.vim', ft = {'markdown', 'vimwiki', 'mermaid'} }, 
+  { 'chazmcgarvey/vim-mermaid', ft = {'markdown', 'vimwiki', 'mermaid'} }, 
 
   {
     'godlygeek/tabular',
@@ -119,6 +125,7 @@ local plugins = {
 
   {
     'dkarter/bullets.vim',
+    disable = 1,
     ft = {'markdown', 'vimwiki'},
     cmd = {'ToggleCheckbox'},
     setup = function()

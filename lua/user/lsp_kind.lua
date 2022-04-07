@@ -29,12 +29,17 @@ M.cmp_kind = {
   Variable = " ",
 }
 
+--   Error:   ✘
+--   Warn:  ⚠ 
+--   Hint:  
+--   Info:   ⁱ
 M.icons = {
-  error = " ",
-  warn = " ",
-  info = "",
-  hint = " ",
-  code_action = "",
+  error = "✗",  -- " ",
+  warn = "⚠",  -- " ",
+  info =  "",  -- "",
+  hint = "", -- " ",
+  code_action =  "",  -- "",
+  -- "", 'λ', '', '', '', wrench??
   test = "",
   docs = "",
   clock = " ",

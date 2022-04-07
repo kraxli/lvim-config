@@ -12,3 +12,8 @@
 ### Vimwiki replacements
 
 - [Mkdnflow.nvim](https://github.com/jakewvincent/mkdnflow.nvim): Tools for markdown notebook navigation and management
+
+
+## General
+
+SmiteshP/nvim-gps
