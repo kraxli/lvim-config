@@ -23,6 +23,7 @@ sudo apt-get install xclip
 # -- markdwon --
 sudo npm install -g markdownlint-cli
 brew install vale
+yarn add mermaid
 
 # python:
 sudo pip install pyright pylsp
