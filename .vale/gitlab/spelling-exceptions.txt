@@ -62,6 +62,7 @@ Datadog
 Debian
 Decompressor
 Denormalization
+Deserializer
 DevOps
 Disqus
 Divio
@@ -101,6 +102,7 @@ GitLab
 Gitaly
 Gitea
 Github
+Gitlab
 Gitleaks
 Gitpod
 Gitsigns
@@ -199,6 +201,7 @@ Opsgenie
 Overcommit
 Packagist
 Patroni
+Pentest
 PgBouncer
 Phabricator
 Pipfile
@@ -573,6 +576,7 @@ onboarding
 onedarker
 parallelization
 parallelizations
+paravirtualization
 passwordless
 performant
 pgLoader
@@ -613,6 +617,7 @@ proxying
 pseudocode
 pseudonymized
 pseudonymizer
+ptrace
 pytest
 queryable
 rbtrace
@@ -686,6 +691,7 @@ scalers
 scatterplot
 scatterplots
 scrollable
+seccomp
 serializer
 serializers
 serializing
@@ -899,8 +905,11 @@ versionless
 viewport
 viewports
 vimscript
+virglrenderer
+virtio
 virtualized
 virtualizing
+vulnerabilities
 walkthrough
 walkthroughs
 webpack

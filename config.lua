@@ -6,6 +6,7 @@ lvim.colorscheme = "pablo"
 lvim.debug = false
 vim.lsp.set_log_level "warn"
 lvim.log.level = "warn"
+-- vim.o.conceallevel = 2 -- uncomment if you want to see concealed text
 require("user.neovim").config()
 
 -- Customization
@@ -18,8 +19,6 @@ lvim.builtin.presence = { active = false } -- change to true if you want discord
 lvim.builtin.orgmode = { active = false } -- change to true if you want orgmode.nvim
 lvim.builtin.dap.active = false -- change this to enable/disable debugging
 lvim.builtin.fancy_statusline = { active = true } -- enable/disable fancy statusline
-lvim.builtin.fancy_bufferline = { active = true } -- enable/disable fancy bufferline
-lvim.builtin.fancy_dashboard = { active = true } -- enable/disable fancy dashboard
 lvim.builtin.fancy_wild_menu = { active = false } -- enable/disable use wilder.nvim
 lvim.builtin.fancy_rename = { active = true } -- enable/disable custom rename
 lvim.builtin.fancy_diff = { active = false } -- enable/disable fancier git diff
@@ -28,7 +27,7 @@ lvim.builtin.test_runner = { active = true } -- change this to enable/disable vi
 lvim.builtin.cheat = { active = true } -- enable cheat.sh integration
 lvim.builtin.sql_integration = { active = false } -- use sql integration
 lvim.builtin.neoscroll = { active = true } -- smooth scrolling
-lvim.builtin.neoclip = { active = true, enable_persistant_history = false }
+lvim.builtin.neoclip = { active = true, enable_persistent_history = false }
 lvim.builtin.nonumber_unfocus = false -- diffrentiate between focused and non focused windows
 lvim.builtin.harpoon = { active = true } -- use the harpoon plugin
 lvim.builtin.remote_dev = { active = false } -- enable/disable remote development
@@ -44,6 +43,11 @@ lvim.builtin.metals = {
   serverVersion = "0.10.9+271-a8bb69f6-SNAPSHOT",
 }
 lvim.builtin.collaborative_editing = { active = false } -- enable/disable collaborative editing
+lvim.builtin.file_browser = { active = false } -- enable/disable telescope file browser
+lvim.builtin.sniprun = { active = false } -- enable/disable sniprun
+lvim.builtin.tag_provider = "symbols-outline" -- change this to use different tag providers ( symbols-outline or vista )
+lvim.builtin.editorconfig = { active = true } -- enable/disable editorconfig
+lvim.builtin.global_statusline = false -- set true to use global statusline
 
 local user = os.getenv "USER"
 if user and user == "abz" then
@@ -56,6 +60,8 @@ if user and user == "abz" then
   lvim.builtin.sql_integration.active = true
   vim.g.instant_username = user
   lvim.builtin.collaborative_editing.active = true
+  lvim.builtin.file_browser.active = true
+  lvim.builtin.global_statusline = true
   require("user.prose").config() -- setup prosemd-lsp for my local use
 end
 lvim.lsp.diagnostics.virtual_text = false -- remove this line if you want to see inline errors
@@ -86,10 +92,20 @@ end
 
 -- Language Specific
 -- =========================================
-vim.list_extend(
-  lvim.lsp.override,
-  { "rust_analyzer", "tsserver", "dockerls", "texlab", "sumneko_lua", "gopls", "jsonls", "yamlls" }
-)
+vim.list_extend(lvim.lsp.override, {
+  "clangd",
+  "dockerls",
+  "gopls",
+  "jdtls",
+  "pyright",
+  "r_language_server",
+  "rust_analyzer",
+  "sumneko_lua",
+  "taplo",
+  "texlab",
+  "tsserver",
+  "yamlls",
+})
 require("user.null_ls").config()
 
 -- Additional Plugins

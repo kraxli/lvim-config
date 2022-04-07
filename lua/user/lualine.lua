@@ -5,55 +5,6 @@ local function clock()
   return kind.icons.clock .. os.date "%H:%M"
 end
 
-local function lsp_progress()
-  local messages = vim.lsp.util.get_progress_messages()
-  if #messages == 0 then
-    return ""
-  end
-  local status = {}
-  for _, msg in pairs(messages) do
-    table.insert(status, (msg.percentage or 0) .. "%% " .. (msg.title or ""))
-  end
-  -- local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-  -- local spinners = { " ", " ", " ", " ", " ", " ", " ", " ", " ", " " }
-  -- local spinners = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
-  local spinners = {
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-  }
-  local ms = vim.loop.hrtime() / 1000000
-  local frame = math.floor(ms / 60) % #spinners
-  return spinners[frame + 1] .. " " .. table.concat(status, " | ")
-end
-
-vim.cmd [[autocmd User LspProgressUpdate let &ro = &ro]]
-
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
   if gitsigns then
@@ -95,7 +46,7 @@ local mode = function()
   elseif mod == "i" or mod == "ic" or mod == "ix" then
     local insert_icons = {
       "  ",
-      "  ",
+      "  ",
       "  ",
     }
     return insert_icons[selector]
@@ -110,7 +61,7 @@ local mode = function()
     local command_icons = {
       "  ",
       "  ",
-      "  ",
+      "  ",
     }
 
     return command_icons[selector]
@@ -181,35 +132,9 @@ local function get_file_icon_color()
   end
 end
 
-local default_colors = {
-  bg = "#202328",
-  bg_alt = "#202328",
-  fg = "#bbc2cf",
-  yellow = "#ECBE7B",
-  cyan = "#008080",
-  darkblue = "#081633",
-  green = "#98be65",
-  orange = "#FF8800",
-  violet = "#a9a1e1",
-  magenta = "#c678dd",
-  blue = "#51afef",
-  red = "#ec5f67",
-  git = { change = "#ECBE7B", add = "#98be65", delete = "#ec5f67", conflict = "#bb7a61" },
-}
-
 M.config = function()
-  local colors = default_colors
-  local themes = require("user.theme").colors
   local _time = os.date "*t"
-  if _time.hour >= 1 and _time.hour < 9 then
-    colors = themes.rose_pine_colors
-  elseif _time.hour >= 9 and _time.hour < 17 then
-    colors = themes.tokyonight_colors
-  elseif _time.hour >= 17 and _time.hour < 21 then
-    colors = themes.doom_one_colors
-  elseif (_time.hour >= 21 and _time.hour < 24) or (_time.hour >= 0 and _time.hour < 1) then
-    colors = themes.kanagawa_colors
-  end
+  local colors = require("user.theme").current_colors()
 
   -- Color table for highlights
   local mode_color = {
@@ -265,7 +190,9 @@ M.config = function()
         normal = { c = { fg = colors.fg, bg = colors.bg } },
         inactive = { c = { fg = colors.fg, bg = colors.bg_alt } },
       },
-      disabled_filetypes = { "dashboard", "NvimTree", "Outline", "alpha" },
+      disabled_filetypes = { "dashboard", "NvimTree", "Outline", "alpha", "vista", "vista_kind", "TelescopePrompt" },
+      always_divide_middle = true,
+      globalstatus = lvim.builtin.global_statusline,
     },
     sections = {
       -- these are to remove the defaults
@@ -287,9 +214,6 @@ M.config = function()
       lualine_c = {
         {
           function()
-            vim.api.nvim_command(
-              "hi! LualineModeInactive guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg_alt
-            )
             local selector = math.floor(_time.hour / 8) + 1
             local icns = {
               "  ",
@@ -297,10 +221,10 @@ M.config = function()
               "  ",
             }
             return icns[selector]
-            -- return " "
-            -- return mode()
           end,
-          color = "LualineModeInactive",
+          color = function()
+            return { fg = mode_color[vim.fn.mode()], bg = colors.bg_alt }
+          end,
           padding = { left = 1, right = 0 },
         },
         {
@@ -325,10 +249,11 @@ M.config = function()
 
   ins_left {
     function()
-      vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
       return mode()
     end,
-    color = "LualineMode",
+    color = function()
+      return { fg = mode_color[vim.fn.mode()], bg = colors.bg }
+    end,
     padding = { left = 1, right = 0 },
   }
   ins_left {
@@ -357,6 +282,10 @@ M.config = function()
   ins_left {
     function()
       vim.api.nvim_command("hi! LualineFileIconColor guifg=" .. get_file_icon_color() .. " guibg=" .. colors.bg)
+      local fname = vim.fn.expand "%:p"
+      if string.find(fname, "term://") ~= nil then
+        return kind.icons.term
+      end
       local winnr = vim.api.nvim_win_get_number(vim.api.nvim_get_current_win())
       if winnr > 10 then
         winnr = 10
@@ -375,6 +304,19 @@ M.config = function()
       local fname = vim.fn.expand "%:p"
       local ftype = vim.fn.expand "%:e"
       local cwd = vim.api.nvim_call_function("getcwd", {})
+      if
+        string.find(fname, "term") ~= nil
+        and string.find(fname, "lazygit;#toggleterm") ~= nil
+        and (vim.fn.has "linux" == 1 or vim.fn.has "mac" == 1)
+      then
+        local git_repo_cmd = io.popen 'git remote get-url origin | tr -d "\n"'
+        local git_repo = git_repo_cmd:read "*a"
+        git_repo_cmd:close()
+        local git_branch_cmd = io.popen 'git branch --show-current | tr -d "\n"'
+        local git_branch = git_branch_cmd:read "*a"
+        git_branch_cmd:close()
+        return git_repo .. "~" .. git_branch
+      end
       local show_name = vim.fn.expand "%:t"
       if #cwd > 0 and #ftype > 0 then
         show_name = fname:sub(#cwd + 2)
@@ -391,9 +333,9 @@ M.config = function()
     source = diff_source,
     symbols = { added = "  ", modified = "柳", removed = " " },
     diff_color = {
-      added = { fg = colors.git.add },
-      modified = { fg = colors.git.change },
-      removed = { fg = colors.git.delete },
+      added = { fg = colors.git.add, bg = colors.bg },
+      modified = { fg = colors.git.change, bg = colors.bg },
+      removed = { fg = colors.git.delete, bg = colors.bg },
     },
     color = {},
     cond = nil,
@@ -451,11 +393,6 @@ M.config = function()
     },
   }
 
-  ins_left {
-    lsp_progress,
-    cond = conditions.hide_small,
-  }
-
   -- Insert mid section. You can make any number of sections in neovim :)
   -- for lualine it's any number greater then 2
   ins_left {
@@ -504,7 +441,11 @@ M.config = function()
       end
       local buf_ft = vim.bo.filetype
       local buf_client_names = {}
-      local trim = vim.fn.winwidth(0) < 120
+      local trim_width = 120
+      if lvim.builtin.global_statusline then
+        trim_width = 100
+      end
+      local trim = vim.fn.winwidth(0) < trim_width
 
       for _, client in pairs(buf_clients) do
         if client.name ~= "null-ls" then

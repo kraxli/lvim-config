@@ -24,9 +24,11 @@ exceptions:
   - ARP
   - ASCII
   - AWS
+  - BAR
   - BGP
   - BSD
   - CAS
+  - CASMM
   - CDN
   - CIS
   - CLI
@@ -36,6 +38,7 @@ exceptions:
   - CORE
   - CPU
   - CRIME
+  - CSPM
   - CSRF
   - CSS
   - CSV
@@ -50,6 +53,7 @@ exceptions:
   - DNS
   - DOM
   - DSA
+  - DSS
   - DVCS
   - ECDSA
   - ECS
@@ -82,6 +86,7 @@ exceptions:
   - HDD
   - HEAD
   - HIPAA
+  - HMP
   - HSTS
   - HTML
   - HTTP
@@ -102,6 +107,7 @@ exceptions:
   - JSON
   - JVM
   - JWT
+  - KVM
   - LAN
   - LDAP
   - LDAPS
@@ -118,6 +124,7 @@ exceptions:
   - NDA
   - NFS
   - NGINX
+  - NIST
   - NOTE
   - NPM
   - NTP
@@ -126,6 +133,7 @@ exceptions:
   - OSS
   - OWASP
   - PAT
+  - PCI
   - PCI-DSS
   - PDF
   - PEM
@@ -137,11 +145,14 @@ exceptions:
   - POST
   - PPP
   - PUT
+  - QEMU
+  - QMP
   - RAID
   - RAM
   - RBAC
   - RDP
   - REST
+  - RFB
   - RFC
   - RHEL
   - RPC
@@ -152,6 +163,7 @@ exceptions:
   - RVM
   - SAAS
   - SAML
+  - SANS
   - SAST
   - SATA
   - SCIM
@@ -171,6 +183,7 @@ exceptions:
   - SOX
   - SPDX
   - SPF
+  - SPICE
   - SQL
   - SSD
   - SSG
@@ -188,6 +201,7 @@ exceptions:
   - TLS
   - TODO
   - TOML
+  - TSC
   - TTL
   - UDP
   - UNIX
@@ -198,6 +212,7 @@ exceptions:
   - UTF
   - UUID
   - VCS
+  - VNC
   - VPC
   - VPN
   - WAF
