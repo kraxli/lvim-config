@@ -62,10 +62,17 @@ M.set_icon = function()
       color = "#689FB6",
       name = "HCL",
     },
+<<<<<<< HEAD
     ["yarn.lock"] = {
       icon = "",
       color = "#cc3534",
       name = "YarnLock",
+=======
+    sol = {
+      icon = "",
+      color = "#555555",
+      name = "Sol",
+>>>>>>> abzcoding/lvim/main
     },
   }
 end

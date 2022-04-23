@@ -89,19 +89,12 @@ vim.cmd([[
 -- Rafi
 ------------------------------------------------------------------
 
-  vim.cmd([[
-    " Re-select blocks after indenting in visual/select mode
-    xnoremap < <gv
-    xnoremap > >gv|
+  vim.api.nvim_set_keymap('<Tab>', '>gv|', {silent=true, noremap=true})
+  vim.api.nvim_set_keymap('<S-Tab>', '<gv', {silent=true, noremap=true})
+  vim.api.nvim_set_keymap('x', '<', '<gv', {silent=true, noremap=true})
+  vim.api.nvim_set_keymap('n', '>', '>>_')
+  vim.api.nvim_set_keymap('n', '<', '<<_')
 
-    " Use tab for indenting in visual/select mode
-    xnoremap <Tab> >gv|
-    xnoremap <S-Tab> <gv
-
-    " Indent and jump to first non-blank character linewise
-    nmap >  >>_
-    nmap <  <<_
-  ]])
 
   -- EXAMPLES:
   -- v  <Space>/    * <Esc><Cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>
@@ -118,6 +111,7 @@ end
 M.telescope = function()
   -- close telescope with q
   vim.cmd('au! Filetype TelescopePrompt nmap q <esc>')
+  vim.cmd('au! Filetype toggleterm nmap q <esc>')
 end
 
 ------------------------------------------------------------------

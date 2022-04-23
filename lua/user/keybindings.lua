@@ -14,7 +14,6 @@ end
 M.set_terminal_keymaps = function()
   local opts = { noremap = true }
   vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
   vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
@@ -218,6 +217,10 @@ M.config = function()
     set_harpoon_keymaps()
   end
   lvim.keys.visual_mode["p"] = [["_dP]]
+  if lvim.builtin.refactoring.active then
+    lvim.keys.visual_mode["ga"] =
+      "<Esc><cmd>lua local ok, _ = require('refactoring') if ok then require('telescope').extensions.refactoring.refactors() else vim.lsp.buf.range_code_action() end<CR>"
+  end
   lvim.keys.visual_mode["<leader>st"] = "<Cmd>lua require('user.telescope').grep_string_visual()<CR>"
 
   -- WhichKey keybindings
@@ -252,10 +255,8 @@ M.config = function()
     s = { "<cmd>lua require('user.telescope').git_status()<cr>", "Git Status" },
     z = { "<cmd>lua require('user.telescope').search_only_certain_files()<cr>", "Certain Filetype" },
   }
-  lvim.builtin.which_key.mappings["C"] = {
-    "<cmd>lua require('telescope').extensions.command_palette.command_palette()<cr>",
-    " Command Palette",
-  }
+  lvim.builtin.which_key.mappings["C"] = { "<cmd>Telescope command_center<cr>", " Command Palette" }
+  lvim.keys.normal_mode["<c-P>"] = "<cmd>Telescope command_center<cr>"
 
   if lvim.builtin.file_browser.active then
     lvim.builtin.which_key.mappings["se"] = { "<cmd>Telescope file_browser<cr>", "File Browser" }
@@ -279,13 +280,10 @@ M.config = function()
       "Prev Diagnostic",
     }
   end
-  if lvim.builtin.fancy_rename then
-    lvim.builtin.which_key.mappings["l"]["r"] = { "<cmd>lua require('renamer').rename()<cr>", "Rename" }
-    lvim.builtin.which_key.vmappings["l"] = {
-      name = "+Lsp",
-      r = { "<ESC><CMD>lua require('renamer').rename()<CR>", "Rename" },
-    }
-  end
+  lvim.builtin.which_key.vmappings["l"] = {
+    name = "+Lsp",
+    r = { "<ESC><CMD>lua vim.lsp.buf.rename()<CR>", "Rename" },
+  }
   lvim.builtin.which_key.mappings["l"]["f"] = {
     "<cmd>lua vim.lsp.buf.formatting_seq_sync()<cr>",
     "Format",
